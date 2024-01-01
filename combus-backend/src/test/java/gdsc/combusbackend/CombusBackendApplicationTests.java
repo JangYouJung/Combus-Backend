@@ -1,10 +1,10 @@
-package gdsc.combusserver;
+package gdsc.combusbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CombusServerApplicationTests {
+class CombusBackendApplicationTests {
 
 	@Test
 	void contextLoads() {
