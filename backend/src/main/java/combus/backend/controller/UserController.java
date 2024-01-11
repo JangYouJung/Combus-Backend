@@ -1,11 +1,16 @@
 package combus.backend.controller;
 
+import combus.backend.domain.Reservation;
 import combus.backend.domain.User;
+import combus.backend.repository.ReservationRepository;
 import combus.backend.repository.UserRepository;
 import combus.backend.request.LoginRequest;
+import combus.backend.service.ReservationService;
 import combus.backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -26,10 +32,6 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest LoginRequest, BindingResult bindingResult,
@@ -48,8 +50,7 @@ public class UserController {
             return "redirect:/users/login";
         }
 
-
-        // 로그인 성공 => 세션 생성
+        // 로그인 성공시 세션 생성
         // 세션을 생성하기 전에 기존의 세션 파기
         httpServletRequest.getSession().invalidate();
         HttpSession session = httpServletRequest.getSession(true);  // Session이 없으면 생성
@@ -59,6 +60,7 @@ public class UserController {
         session.setMaxInactiveInterval(7200); // Session이 2시간동안 유지
 
         return "home";
+
     }
 
 }
