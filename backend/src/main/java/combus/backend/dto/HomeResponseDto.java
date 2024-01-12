@@ -13,6 +13,4 @@ public class HomeResponseDto {
     private String createdAt;
     private Long boardingStop;
     private Long dropStop;
-
-
 }

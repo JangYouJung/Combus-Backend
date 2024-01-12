@@ -2,11 +2,14 @@ package combus.backend.controller;
 
 import combus.backend.domain.Reservation;
 import combus.backend.domain.User;
+import combus.backend.dto.LoginUserResponseDto;
 import combus.backend.repository.ReservationRepository;
 import combus.backend.repository.UserRepository;
 import combus.backend.request.LoginRequest;
 import combus.backend.service.ReservationService;
 import combus.backend.service.UserService;
+import combus.backend.util.ResponseCode;
+import combus.backend.util.ResponseData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.NoArgsConstructor;
@@ -34,21 +37,23 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest LoginRequest, BindingResult bindingResult,
-                                   HttpServletRequest httpServletRequest) {
+    public ResponseEntity<ResponseData<LoginUserResponseDto>> login(@RequestBody LoginRequest LoginRequest, BindingResult bindingResult,
+                                                                    HttpServletRequest httpServletRequest) {
 
         String loginId = LoginRequest.getLoginId();
         System.out.println("loginId: "+ loginId);
 
-        User loginUser = userService.authenticateUser(loginId);
+        User user = userService.authenticateUser(loginId);
 
         // 회원 번호가 틀린 경우
-        if(loginUser == null){
+        if(user == null){
             bindingResult.reject("login failed", "로그인 실패! 회원 번호를 확인해주세요.");
         }
         if(bindingResult.hasErrors()) {
-            return "redirect:/users/login";
+            return ResponseData.toResponseEntity(ResponseCode.ACCOUNT_NOT_FOUND,null);
         }
+
+        LoginUserResponseDto loginUser = new LoginUserResponseDto(user);
 
         // 로그인 성공시 세션 생성
         // 세션을 생성하기 전에 기존의 세션 파기
@@ -59,7 +64,7 @@ public class UserController {
         session.setAttribute("userId", loginUser.getId());
         session.setMaxInactiveInterval(7200); // Session이 2시간동안 유지
 
-        return "home";
+        return ResponseData.toResponseEntity(ResponseCode.SIGNIN_SUCCESS,loginUser);
 
     }
 
