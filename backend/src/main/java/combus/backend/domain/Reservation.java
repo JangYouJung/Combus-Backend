@@ -18,7 +18,8 @@ public class Reservation {
 
     private Long userId;
     private Long busId;
-    private String status;
+    private boolean boardingStatus;
+    private boolean dropStatus;
     private String createdAt;
     private Long boardingStop;
     private Long dropStop;

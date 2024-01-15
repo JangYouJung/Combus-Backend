@@ -10,8 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    Optional<Reservation> findByUserId(Long userId);
-
-    Optional<Reservation> findByUserIdAndStatus(Long userId, String status);
+    Optional<Reservation> findAllByUserId(Long userId);
+    Optional<Reservation> findByUserIdAndDropStatus(Long userId, boolean dropStatus);
 
 }
