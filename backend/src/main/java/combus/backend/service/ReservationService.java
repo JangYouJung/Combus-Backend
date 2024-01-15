@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,12 +23,11 @@ public class ReservationService {
     // 홈화면에서 유효한 예약 정보가 있을 경우 예약 정보 return
     public Reservation ReservationCheck(Long userId){
 
-        //Optional<Reservation> reservation_check = reservationRepository.findByUserIdAndStatus(userId, "wait");
-        Optional<Reservation> reservation_check = reservationRepository.findByUserId(userId);
+        Optional<Reservation>  valid_reservation= reservationRepository.findByUserIdAndDropStatus(userId, false);
         Reservation reservation;
 
-        if (reservation_check.isPresent()) {
-            reservation = reservation_check.get();
+        if (valid_reservation.isPresent()) {
+            reservation = valid_reservation.get();
             System.out.println(reservation);
             return reservation;
 
