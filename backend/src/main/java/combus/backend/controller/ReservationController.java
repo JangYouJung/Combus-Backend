@@ -24,6 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -53,12 +54,11 @@ public class ReservationController {
 
         URI uri = new URI(urlStr);
         String xmlData = restTemplate.getForObject(uri, String.class);
-
         List<BusResponseDto> vehIds = parseXml(xmlData);
-        System.out.println(xmlData);
 
         return new ResponseEntity<>(vehIds, HttpStatus.OK);
     }
+
 
     private List<BusResponseDto> parseXml(String xmlData) throws Exception {
         List<BusResponseDto> busList = new ArrayList<>();
@@ -85,16 +85,11 @@ public class ReservationController {
 
                     // 첫 번째 도착 예정 버스의 남은 시간이 5분보다 커야 예약 가능
                     String vehId = getElementValue(itemListElement, "vehId1");
-                    if(vehId.equals("0")) break;
+                    if(vehId.equals("0")) break; // 버스 ID가 0이면 PASS
 
                     String busRouteId = getElementValue(itemListElement, "busRouteId");
                     String busRouteAbrv = getElementValue(itemListElement, "busRouteAbrv");
-
-
-                    String low2 = getElementValue(itemListElement,"busType1");
-                    System.out.println("low2: "+low2);
-                    int low = Integer.parseInt(getElementValue(itemListElement,"busType1"));
-                    System.out.println("low:"+ low);
+                    int low = Integer.parseInt(Objects.requireNonNull(getElementValue(itemListElement, "busType1")));
 
                     busResponseDto = new BusResponseDto(vehId,busRouteId,busRouteAbrv,low);
 
@@ -102,16 +97,11 @@ public class ReservationController {
                 else{
                     // 첫 번째 도착 예정 버스의 남은 시간이 5분 이하면 다음 버스(두 번째 도착 버스) 예약하도록
                     String vehId = getElementValue(itemListElement, "vehId2");
-                    if(vehId.equals("0")) break;
+                    if(vehId.equals("0")) break; // 버스 ID가 0이면 PASS
 
                     String busRouteId = getElementValue(itemListElement, "busRouteId");
                     String busRouteAbrv = getElementValue(itemListElement, "busRouteAbrv");
-
-                    String low2 = getElementValue(itemListElement,"busType2");
-                    System.out.println("low2: "+low2);
-                    int low = Integer.parseInt(getElementValue(itemListElement,"busType2"));
-                    System.out.println("low:"+ low);
-
+                    int low = Integer.parseInt(Objects.requireNonNull(getElementValue(itemListElement, "busType2")));
 
                     busResponseDto = new BusResponseDto(vehId,busRouteId,busRouteAbrv,low);
                 }
