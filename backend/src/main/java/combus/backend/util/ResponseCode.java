@@ -18,7 +18,7 @@ public enum ResponseCode {
 
 
     /* 201 CREATED : 요청 성공, 자원 생성 */
-    RESERVATION_SUCCESS(CREATED, "버스 예약 성공"),
+    RESERVATION_CREATED(CREATED, "버스 예약 성공"),
 
 
     /* 400 BAD_REQUEST : 잘못된 요청 */
