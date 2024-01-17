@@ -1,15 +1,11 @@
 package combus.backend.service;
 
-import combus.backend.domain.Driver;
 import combus.backend.domain.Reservation;
 import combus.backend.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,7 +14,6 @@ public class ReservationService {
 
     @Autowired
     private final ReservationRepository reservationRepository;
-
 
     // 홈화면에서 유효한 예약 정보가 있을 경우 예약 정보 return
     public Reservation ReservationCheck(Long userId){
