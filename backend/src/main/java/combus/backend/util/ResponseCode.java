@@ -15,6 +15,9 @@ public enum ResponseCode {
     SIGNOUT_SUCCESS(OK, "로그아웃 성공"),
     EMPTY_RESERVATION_SUCCESS(OK, "예약 내역 존재하지 않습니다"),
     LOAD_RESERVATION_SUCCESS(OK,"예약 내역을 성공적으로 불러왔습니다"),
+    RESERVATION_ONBOARDING_SUCCUESS(OK, "예약을 성공적으로 탑승 처리 했습니다."),
+    RESERVATION_OFFBOARDING_SUCCESS(OK, "예약을 성공적으로 하차 처리 했습니다."),
+
 
 
     /* 201 CREATED : 요청 성공, 자원 생성 */
@@ -41,6 +44,7 @@ public enum ResponseCode {
 
 
     /* 500 CONFLICT */;
+
 
     private final HttpStatus httpStatus;
     private final String detail;

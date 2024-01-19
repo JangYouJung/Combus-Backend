@@ -45,4 +45,12 @@ public class Reservation {
         this.dropStop = dropStop;
         this.busRouteName = busRouteName;
     }
+
+    public boolean getBoardingStatus() {
+        return boardingStatus;
+    }
+
+    public boolean getDropStatus() {
+        return dropStatus;
+    }
 }
