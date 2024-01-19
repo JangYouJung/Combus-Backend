@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.net.URI;
 
 @RequiredArgsConstructor
@@ -53,4 +54,19 @@ public class HomeController {
         return ResponseData.toResponseEntity(ResponseCode.LOAD_RESERVATION_SUCCESS,reserved);
     }
 
+    @PutMapping("/home/{reservationId}")
+    public ResponseEntity<ResponseData<Reservation>> changeReservationStatus(
+            @PathVariable("reservationId") Long ReservationId
+    )throws IOException {
+        Reservation reservation = reservationService.findByReservationId(ReservationId);
+
+        if(!reservation.getBoardingStatus()){ // 아직 탑승 전일 경우 -> boarding status를 true로 바꿔준다.
+            reservationRepository.updateBoardingStatus(reservation.getId());
+            return ResponseData.toResponseEntity(ResponseCode.RESERVATION_ONBOARDING_SUCCUESS,null);
+        }
+        else{ // 승차 완료일 경우 drop status를 변경해준다.
+            reservationRepository.updateDropStatus(reservation.getId());
+            return ResponseData.toResponseEntity(ResponseCode.RESERVATION_OFFBOARDING_SUCCESS,null);
+        }
+    }
 }
