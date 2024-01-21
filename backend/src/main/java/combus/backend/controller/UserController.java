@@ -37,8 +37,11 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseData<LoginUserResponseDto>> login(@RequestBody LoginRequest LoginRequest, BindingResult bindingResult,
-                                                                    HttpServletRequest httpServletRequest) {
+    public ResponseEntity<ResponseData<LoginUserResponseDto>> login(
+            @RequestBody LoginRequest LoginRequest,
+            BindingResult bindingResult,
+            HttpServletRequest httpServletRequest
+    ) {
 
         String loginId = LoginRequest.getLoginId();
         System.out.println("loginId: "+ loginId);
