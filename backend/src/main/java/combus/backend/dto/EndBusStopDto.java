@@ -1,6 +1,5 @@
 package combus.backend.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class BusStopDto {
+public class EndBusStopDto {
     private String arsId; // 버스 정류장 고유 번호
     private String name; // 버스 정류장 이름
     private String direction; // 진행 방향
@@ -16,7 +15,7 @@ public class BusStopDto {
     private double gpsY; // 정류소 위치  y좌표 : 위도
     private int seq;
 
-    public BusStopDto(String arsId, String name, String direction, double gpsX, double gpsY, int seq) {
+    public EndBusStopDto(String arsId, String name, String direction, double gpsX, double gpsY, int seq) {
         this.arsId = arsId;
         this.name = name;
         this.direction = direction;
