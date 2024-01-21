@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
@@ -15,6 +16,7 @@ public class UserService {
 
     @Autowired
     private final UserRepository userRepository;
+
 
     public User authenticateUser(String loginId) {
 
@@ -26,12 +28,20 @@ public class UserService {
         if (user_check.isPresent()) {
             user = user_check.get();
             System.out.println(user);
+            return user;
+        } else return null;
+    }
 
+    public User findUserById(Long userId) {
+        Optional<User> getUser = userRepository.findById(userId);
+        User user;
+
+        if (getUser.isPresent()) {
+            user = getUser.get();
+            System.out.println(getUser);
             return user;
 
-        } else {
-            return null;
-        }
+        } else return null;
     }
 }
 
