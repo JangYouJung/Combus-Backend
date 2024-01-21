@@ -2,6 +2,7 @@ package combus.backend.controller;
 
 import combus.backend.domain.Reservation;
 import combus.backend.domain.User;
+import combus.backend.dto.ReservationResponseDto;
 import combus.backend.repository.ReservationRepository;
 import combus.backend.service.ReservationService;
 import combus.backend.util.ResponseCode;
@@ -30,7 +31,7 @@ public class HomeController {
     private ReservationRepository reservationRepository;
 
     @GetMapping("/home")
-    public ResponseEntity<ResponseData<Reservation>> home(@SessionAttribute(name = "userId", required = false)Long userId) {
+    public ResponseEntity<ResponseData<ReservationResponseDto>> home(@SessionAttribute(name = "userId", required = false)Long userId) {
 
         // 세션이 끊어진 경우 -> 로그인 화면으로 redirect
         if(userId == null){
@@ -42,16 +43,17 @@ public class HomeController {
         }
 
         System.out.println(userId);
-        Reservation reserved = reservationService.ReservationCheck(userId);
+        Reservation reservation = reservationService.ReservationCheck(userId);
 
         // 예약 내역이 없는 경우
-        if(reserved == null){
+        if(reservation == null){
             System.out.println("예약 내역이 없습니다.");
             return ResponseData.toResponseEntity(ResponseCode.EMPTY_RESERVATION_SUCCESS,null);
         }
 
         // 예약 내역이 존재하는 경우
-        return ResponseData.toResponseEntity(ResponseCode.LOAD_RESERVATION_SUCCESS,reserved);
+        ReservationResponseDto reservationDto = new ReservationResponseDto(reservation);
+        return ResponseData.toResponseEntity(ResponseCode.LOAD_RESERVATION_SUCCESS,reservationDto);
     }
 
     @PutMapping("/home/{reservationId}")
@@ -60,7 +62,7 @@ public class HomeController {
     )throws IOException {
         Reservation reservation = reservationService.findByReservationId(ReservationId);
 
-        if(!reservation.getBoardingStatus()){ // 아직 탑승 전일 경우 -> boarding status를 true로 바꿔준다.
+        if(!reservation.isBoardingStatus()){ // 아직 탑승 전일 경우 -> boarding status를 true로 바꿔준다.
             reservationRepository.updateBoardingStatus(reservation.getId());
             return ResponseData.toResponseEntity(ResponseCode.RESERVATION_ONBOARDING_SUCCUESS,null);
         }

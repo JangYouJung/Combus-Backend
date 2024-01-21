@@ -25,7 +25,7 @@ public enum ResponseCode {
 
 
     /* 400 BAD_REQUEST : 잘못된 요청 */
-
+    FAILED_RESERVATION_CREATTION(BAD_REQUEST,"예약이 실패하였습니다. 다시 시도해주세요" ),
 
     /* 401 UNAUTHORIZED : 인증되지 않은 사용자 */
     SESSION_EXPIRED(UNAUTHORIZED,"세션이 만료되었습니다. 다시 로그인해주세요"),
@@ -36,14 +36,10 @@ public enum ResponseCode {
 
 
     /* 404 NOT_FOUND : Resource 를 찾을 수 없음 */
-    ACCOUNT_NOT_FOUND(NOT_FOUND, "계정 정보를 찾을 수 없습니다"),
+    ACCOUNT_NOT_FOUND(NOT_FOUND, "계정 정보를 찾을 수 없습니다");
 
 
     /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */
-
-
-
-    /* 500 CONFLICT */;
 
 
     private final HttpStatus httpStatus;
