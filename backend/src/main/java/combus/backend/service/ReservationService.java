@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,16 @@ public class ReservationService {
         } else {
             return null;
         }
+    }
+
+    public List<Reservation> findDetailOfBoardingStop(Long arsId){ // 승차 예정 (예약 중)
+        List<Reservation> find_reservations = reservationRepository.findAllByBoardingStopIdAndBoardingStatusAndDropStatus(arsId, false, false);
+        return find_reservations;
+    }
+
+    public List<Reservation> findDetailOfDropStop(Long arsId){ // 하차 예정 (현재 승차 중)
+        List<Reservation> find_reservations = reservationRepository.findAllByDropStopIdAndBoardingStatusAndDropStatus(arsId, true, false);
+        return find_reservations;
     }
 
 }
