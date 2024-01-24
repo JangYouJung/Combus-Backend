@@ -1,14 +1,11 @@
 package combus.backend.controller;
 
 import combus.backend.domain.Reservation;
-import combus.backend.domain.User;
 import combus.backend.dto.ReservationResponseDto;
 import combus.backend.repository.ReservationRepository;
 import combus.backend.service.ReservationService;
 import combus.backend.util.ResponseCode;
 import combus.backend.util.ResponseData;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +19,7 @@ import java.net.URI;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
-public class HomeController {
+public class UserHomeController {
 
     @Autowired
     private final ReservationService reservationService;
