@@ -34,7 +34,6 @@ public class ReservationApiService {
         System.out.println("itemlist개수: "+itemListNodes.getLength());
 
 
-        // [2] 버스의 seq값이 승차 정류장보다 큰 것 정류장들만 추출 (하차 정류장 후보)
         for (int i = 0; i < itemListNodes.getLength(); i++) {
             Node itemListNode = itemListNodes.item(i);
 
