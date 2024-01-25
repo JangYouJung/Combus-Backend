@@ -1,6 +1,8 @@
 package combus.backend.service;
 
+import combus.backend.domain.BusStop;
 import combus.backend.domain.Reservation;
+import combus.backend.dto.BusPosDto;
 import combus.backend.dto.DriverHomeBusStopDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +28,9 @@ public class BusRouteService {
 
     @Autowired
     ReservationService reservationService;
+
+    @Autowired
+    BusStopService busStopService;
 
     public List<DriverHomeBusStopDto> getDriverRouteInfo(String xml, Long vehId) throws Exception {
         List<DriverHomeBusStopDto> driverHomeBusStopDtoList = new ArrayList<>();
@@ -89,5 +97,35 @@ public class BusRouteService {
         NodeList nodeList = element.getElementsByTagName(tagName).item(0).getChildNodes();
         Node node = nodeList.item(0);
         return node.getNodeValue();
+    }
+
+    public BusPosDto getBusPosParseXml(String xmlData) throws Exception {
+
+        //Open API 에서 추출한 xml 데이터에서 원하는 정보 추출하기
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.parse(new InputSource(new StringReader(xmlData)));
+
+        NodeList itemListNodes = document.getElementsByTagName("itemList");
+        System.out.println("itemlist개수: "+itemListNodes.getLength());
+
+
+        Node itemListNode = itemListNodes.item(0);
+
+        if (itemListNode.getNodeType() == Node.ELEMENT_NODE) {
+            Element itemListElement = (Element) itemListNode;
+
+            BusPosDto busPosDto;
+
+            long stId = Long.parseLong(getElementValue(itemListElement, "stId"));
+            int stSeq = Integer.parseInt(getElementValue(itemListElement, "stOrd"));
+            Boolean stopFlag = Boolean.parseBoolean(getElementValue(itemListElement, "stopFlag"));
+
+            BusStop busStop = busStopService.findByStId(stId);
+
+            busPosDto = new BusPosDto(busStop.getArsId(),stSeq,stopFlag);
+            return busPosDto;
+        }
+        else return null;
     }
 }

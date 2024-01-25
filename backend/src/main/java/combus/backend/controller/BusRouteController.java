@@ -1,6 +1,8 @@
 package combus.backend.controller;
 
+import combus.backend.domain.Bus;
 import combus.backend.domain.BusMatch;
+import combus.backend.dto.BusPosDto;
 import combus.backend.dto.DriverHomeBusStopDto;
 import combus.backend.dto.DriverHomeResponseDto;
 import combus.backend.repository.BusMatchRepository;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +34,9 @@ public class BusRouteController {
 
     // 버스 노선 ID 사용해서 정류장 정보 가져오기
     String getRouteInfoURL = "http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute?";
+
+    //버스 실시간 위치 정보 가져오기
+    String getBusPosURL= "http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId?";
 
     @GetMapping("/home")
     public ResponseEntity<ResponseData<DriverHomeResponseDto>> getBusRoutesByDriverId(
@@ -66,13 +72,28 @@ public class BusRouteController {
                 total_drop += busStopDto.getDrop_cnt();
             }
 
+            BusPosDto busPos = GetBusPosDto(vehId);
+
             DriverHomeResponseDto driverHomeResponseDto =
-                    new DriverHomeResponseDto(vehId, busRouteName, total_reserved, total_drop, busStopList);
+                    new DriverHomeResponseDto(vehId, busRouteName, total_reserved, total_drop, busPos, busStopList);
 
             return ResponseData.toResponseEntity(ResponseCode.DRIVER_HOME_SUCCESS, driverHomeResponseDto);
 
         } else {
             return ResponseData.toResponseEntity(ResponseCode.DRIVER_HOME_FAILED,null);
         }
+    }
+
+    public BusPosDto GetBusPosDto(Long vehId) throws Exception {
+        String url = getBusPosURL + "ServiceKey=" + serviceKey + "&vehId=" + vehId.toString();
+        System.out.println(url);
+
+        URI uri = new URI(url);
+        RestTemplate restTemplate = new RestTemplate();
+        String xmlData = restTemplate.getForObject(uri, String.class);
+
+        BusPosDto busPosDto = busRouteService.getBusPosParseXml(xmlData);
+
+        return busPosDto;
     }
 }

@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface BusStopRepository extends JpaRepository<BusStop, Long> {
     Optional<BusStop> findByArsId(Long arsId);
+    Optional<BusStop> findByStId(Long stId);
 }

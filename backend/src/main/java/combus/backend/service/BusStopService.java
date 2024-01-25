@@ -30,4 +30,15 @@ public class BusStopService {
         }
         else return null;
     }
+
+    public BusStop findByStId(Long stId) {
+        Optional<BusStop> getBusStop = busStopRepository.findByStId(stId);
+        BusStop busStop;
+
+        if(getBusStop.isPresent()){
+            busStop = getBusStop.get();
+            return busStop;
+        }
+        else return null;
+    }
 }
