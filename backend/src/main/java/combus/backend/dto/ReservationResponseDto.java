@@ -18,17 +18,20 @@ public class ReservationResponseDto {
     private String busRouteName;    //버스 노선 번호
     private String boardingStop;    //승차 정류소
     private String dropStop;        //하차 정류소
-    private boolean boardingStatus; //승차 상태
-    private boolean dropStatus;     //하차 상태
-    private boolean wheelChair;     //휠체어 탑승 여부
+    private String status;          // 승하차 상태
 
     public ReservationResponseDto(Reservation reservation){
         date = reservation.getCreatedAt();
         busRouteName = reservation.getBusRouteName();
         boardingStop = reservation.getBoardingStop().getName();
         dropStop = reservation.getDropStop().getName();
-        boardingStatus = reservation.isBoardingStatus();
-        dropStatus = reservation.isDropStatus();
-        wheelChair = reservation.getUser().isWheelchair();
+
+        // 승하차 상태 확인
+        boolean boardingStatus = reservation.isBoardingStatus();
+        boolean dropStatus = reservation.isDropStatus();
+
+        if(boardingStatus == false) status = "승차 전: 버스 오는 중";
+        else status = "탑승 완료: 목적지로 가는 중";
+
     }
 }
