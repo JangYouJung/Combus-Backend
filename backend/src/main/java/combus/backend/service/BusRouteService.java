@@ -49,8 +49,7 @@ public class BusRouteService {
             if (itemListNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element itemListElement = (Element) itemListNode;
 
-                Long arsId = Long.parseLong(getElementValue(itemListElement, "arsId"));
-
+                String arsId =getElementValue(itemListElement, "arsId");
                 String name = getElementValue(itemListElement, "stationNm");
                 double gpsX = Double.parseDouble(getElementValue(itemListElement, "gpsX"));
                 double gpsY = Double.parseDouble(getElementValue(itemListElement, "gpsY"));
@@ -63,6 +62,8 @@ public class BusRouteService {
                 // 예약 내역 DB에서 정류장 승차 예약 내역 가져오기
                 List<Reservation> boardingReservations = reservationService.findDetailOfBoardingStop(arsId);
                 int reserved_cnt = boardingReservations.size(); // 예약 건수
+                System.out.println("승차 예정 건수: "+reserved_cnt);
+
 
                 for(Reservation reservation : boardingReservations){
                     if(reservation.getUser().isWheelchair()) {
@@ -74,6 +75,7 @@ public class BusRouteService {
                 // 예약 내역 DB에서 정류장 하차 예약 내역 가져오기
                 List<Reservation> dropReservations = reservationService.findDetailOfDropStop(arsId);
                 int drop_cnt = dropReservations.size(); // 하차 예정 건수
+                System.out.println("하차 예정 건수: "+drop_cnt);
 
                 for(Reservation reservation : dropReservations){
                     if(reservation.getUser().isWheelchair()) {
@@ -87,7 +89,6 @@ public class BusRouteService {
                 driverHomeBusStopDtoList.add(driverHomeBusStopDto);
                 System.out.println(driverHomeBusStopDto.toString());
 
-                driverHomeBusStopDtoList.add(driverHomeBusStopDto);
             }
         }
         return driverHomeBusStopDtoList;
@@ -121,7 +122,7 @@ public class BusRouteService {
             int stSeq = Integer.parseInt(getElementValue(itemListElement, "stOrd"));
             Boolean stopFlag = Boolean.parseBoolean(getElementValue(itemListElement, "stopFlag"));
 
-            BusStop busStop = busStopService.findByStId(stId);
+            BusStop busStop = busStopService.findByNodeId(stId);
 
             busPosDto = new BusPosDto(busStop.getArsId(),stSeq,stopFlag);
             return busPosDto;
