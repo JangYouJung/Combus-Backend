@@ -1,30 +1,24 @@
 package combus.backend.controller;
 
-import combus.backend.dto.BusResponseDto;
+import combus.backend.domain.BusStop;
+import combus.backend.domain.Reservation;
+import combus.backend.domain.User;
 import combus.backend.repository.ReservationRepository;
+import combus.backend.request.ReservationRequest;
+import combus.backend.service.BusStopService;
 import combus.backend.service.ReservationService;
+import combus.backend.service.UserService;
+import combus.backend.util.ResponseCode;
+import combus.backend.util.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -32,93 +26,125 @@ import java.util.Objects;
 public class ReservationController {
     @Autowired
     ReservationService reservationService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    BusStopService busStopService;
+
     @Autowired
     ReservationRepository reservationRepository;
 
-    @Value("${serviceKey}")
-    String serviceKey;
+    @PostMapping("/")   // 정류장 고유 번호로 예약하기
+    public ResponseEntity<ResponseData> createReservation(
+            @RequestBody ReservationRequest reservationRequest,
+            @SessionAttribute(name = "userId", required = false)Long userId){
 
-    String getStationByUidItemURL = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?";
+        System.out.println("로그인한 유저ID: " + userId);
 
-    @GetMapping("/bus")
-    public ResponseEntity<List<BusResponseDto>> BusList(
-            @RequestParam(value = "arsId") String arsId //승차 정류소 ID
-    ) throws Exception {
-        HttpURLConnection urlConnection = null;
-        InputStream stream = null;
-        String result = null;
-        RestTemplate restTemplate = new RestTemplate();
+        // 세션이 끊어진 경우 -> 로그인 화면으로 redirect
+        if(userId == null){
+            System.out.println("세션 expired");
 
-        String urlStr = getStationByUidItemURL + "ServiceKey=" + serviceKey + "&arsId=" + arsId;
-        System.out.println(urlStr);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("/users/login"));
+            return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
+        }
 
-        URI uri = new URI(urlStr);
-        String xmlData = restTemplate.getForObject(uri, String.class);
-        List<BusResponseDto> vehIds = parseXml(xmlData);
+        String boardingStopId = reservationRequest.getBoardingStop();   // 승차 정류소 번호 arsId
+        String dropStopId = reservationRequest.getDropStop();           // 하파 정류소 번호 arsId
+        Long vehId = Long.parseLong(reservationRequest.getVehId());     // 버스 고유 ID (같은 노선의 버스라도 다 다른 고유값)
+        String busRouteName = reservationRequest.getBusRouteNm();       // 버스 노선명 (ex. 140번 버스)
 
-        return new ResponseEntity<>(vehIds, HttpStatus.OK);
-    }
-
-
-    private List<BusResponseDto> parseXml(String xmlData) throws Exception {
-        List<BusResponseDto> busList = new ArrayList<>();
-
-        //Open API 에서 추출한 xml 데이터에서 원하는 정보 추출하기
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(new InputSource(new StringReader(xmlData)));
-
-        NodeList itemListNodes = document.getElementsByTagName("itemList");
-        System.out.println("itemlist개수: "+itemListNodes.getLength());
-
-        for (int i = 0; i < itemListNodes.getLength(); i++) {
-            Node itemListNode = itemListNodes.item(i);
-
-            if (itemListNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element itemListElement = (Element) itemListNode;
-                BusResponseDto busResponseDto;
-
-                String firstBusTimeInfo = getElementValue(itemListElement, "arrmsg1");
-                // arrmsg1: 첫 번째 도착 예정 버스의 도착 정보 메시지 - ex) 2분후[2번째 전]
-
-                if(firstBusTimeInfo.charAt(0) - 48 > 4 ){
-
-                    // 첫 번째 도착 예정 버스의 남은 시간이 5분보다 커야 예약 가능
-                    String vehId = getElementValue(itemListElement, "vehId1");
-                    if(vehId.equals("0")) break; // 버스 ID가 0이면 PASS
-
-                    String busRouteId = getElementValue(itemListElement, "busRouteId");
-                    String busRouteAbrv = getElementValue(itemListElement, "busRouteAbrv");
-                    int low = Integer.parseInt(Objects.requireNonNull(getElementValue(itemListElement, "busType1")));
-
-                    busResponseDto = new BusResponseDto(vehId,busRouteId,busRouteAbrv,low);
-
-                }
-                else{
-                    // 첫 번째 도착 예정 버스의 남은 시간이 5분 이하면 다음 버스(두 번째 도착 버스) 예약하도록
-                    String vehId = getElementValue(itemListElement, "vehId2");
-                    if(vehId.equals("0")) break; // 버스 ID가 0이면 PASS
-
-                    String busRouteId = getElementValue(itemListElement, "busRouteId");
-                    String busRouteAbrv = getElementValue(itemListElement, "busRouteAbrv");
-                    int low = Integer.parseInt(Objects.requireNonNull(getElementValue(itemListElement, "busType2")));
-
-                    busResponseDto = new BusResponseDto(vehId,busRouteId,busRouteAbrv,low);
-                }
-
-                busList.add(busResponseDto);
+        try {
+            User user = userService.findUserById(userId);
+            if (user == null) {
+                throw new IllegalArgumentException("User with ID " + userId + " not found.");
             }
+
+            BusStop boardingStop = busStopService.findByArsId(boardingStopId);
+            if (boardingStop == null) {
+                throw new IllegalArgumentException("Boarding stop with ARS ID " + boardingStopId + " not found.");
+            }
+
+            BusStop dropStop = busStopService.findByArsId(dropStopId);
+            if (dropStop == null) {
+                throw new IllegalArgumentException("Drop stop with ARS ID " + dropStopId + " not found.");
+            }
+
+            // 객체들이 유효한 경우
+            Reservation reservation = new Reservation(user,vehId,boardingStop,dropStop,busRouteName);
+            System.out.println(reservation.toString());
+            reservationRepository.save(reservation);
+
+            return ResponseData.toResponseEntity(ResponseCode.CREATE_RESERVATION_SUCCESS);
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace(); // 예외 정보를 콘솔에 출력
+            return ResponseData.toResponseEntity(ResponseCode.FAILED_RESERVATION_CREATTION);
         }
-        return busList;
+    }
+
+    @PostMapping("/stt")   // 정류장 이름으로 예약하기
+    public ResponseEntity<ResponseData> createReservationByStName(
+            @RequestBody ReservationRequest reservationRequest,
+            @SessionAttribute(name = "userId", required = false)Long userId) {
+
+        /************************************************
+         *         시각 장애인이 음성으로 예약하는 경우          *
+         *    버스 정류소 id가 아닌 정류소명으로 예약해야 하므로    *
+         *        해당 기능을 위한 api를 따로 제작했다.         *
+        *************************************************/
+
+        System.out.println("로그인한 유저ID: " + userId);
+
+        // 세션이 끊어진 경우 -> 로그인 화면으로 redirect
+        if(userId == null){
+            System.out.println("세션 expired");
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("/users/login"));
+            return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
+        }
+
+        String boardingStopName = reservationRequest.getBoardingStop();         // 승차 정류소 이름
+        String dropStopName = reservationRequest.getDropStop();                 // 하차 정류소 이름
+        Long vehId = Long.parseLong(reservationRequest.getVehId());         // 버스 고유 ID (같은 노선의 버스라도 다 다른 고유값)
+        String busRouteName = reservationRequest.getBusRouteNm();           // 버스 노선명 (ex. 140번 버스)
+
+        try {
+            User user = userService.findUserById(userId);
+            if (user == null) {
+                throw new IllegalArgumentException("User with ID " + userId + " not found.");
+            }
+
+            BusStop boardingStop = busStopService.findByName(boardingStopName);
+            if (boardingStop == null) {
+                throw new IllegalArgumentException("Boarding stop with Name " + boardingStopName + " not found.");
+            }
+
+            BusStop dropStop = busStopService.findByName(dropStopName);
+            if (dropStop == null) {
+                throw new IllegalArgumentException("Drop stop with Name" + dropStopName + " not found.");
+            }
+
+            // 객체들이 유효한 경우
+            Reservation reservation = new Reservation(user,vehId,boardingStop,dropStop,busRouteName);
+            System.out.println(reservation.toString());
+            reservationRepository.save(reservation);
+
+            return ResponseData.toResponseEntity(ResponseCode.CREATE_RESERVATION_SUCCESS);
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace(); // 예외 정보를 콘솔에 출력
+            return ResponseData.toResponseEntity(ResponseCode.FAILED_RESERVATION_CREATTION);
+        }
+
+
+
+
     }
 
 
-    private String getElementValue(Element element, String tagName) {
-        NodeList nodeList = element.getElementsByTagName(tagName);
-        if (nodeList.getLength() > 0) {
-            Node node = nodeList.item(0);
-            return node.getTextContent();
-        }
-        return null;
-    }
 }
