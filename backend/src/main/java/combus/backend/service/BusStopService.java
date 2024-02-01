@@ -19,7 +19,7 @@ public class BusStopService {
     @Autowired
     private final BusStopRepository busStopRepository;
 
-    public BusStop findByArsId(Long ArsId) {
+    public BusStop findByArsId(String ArsId) {
         Optional<BusStop> getBusStop = busStopRepository.findByArsId(ArsId);
         BusStop busStop;
         System.out.println("버스정류장: "+ getBusStop);
@@ -31,8 +31,8 @@ public class BusStopService {
         else return null;
     }
 
-    public BusStop findByStId(Long stId) {
-        Optional<BusStop> getBusStop = busStopRepository.findByStId(stId);
+    public BusStop findByNodeId(Long nodeId) {
+        Optional<BusStop> getBusStop = busStopRepository.findByNodeId(nodeId);
         BusStop busStop;
 
         if(getBusStop.isPresent()){
@@ -40,5 +40,17 @@ public class BusStopService {
             return busStop;
         }
         else return null;
+    }
+
+    public BusStop findByName(String stName) {
+        Optional<BusStop> getBusStop = busStopRepository.findByName(stName);
+        BusStop busStop;
+
+        if(getBusStop.isPresent()){
+            busStop = getBusStop.get();
+            return busStop;
+        }
+        else return null;
+
     }
 }

@@ -87,7 +87,7 @@ public class BusRouteController {
     @GetMapping("/home/{arsId}")
     public ResponseEntity<ResponseData<BusStopReserveInfoDto>> getBusStopReservationInfo(
             @SessionAttribute(name = "userId", required = false) Long driverId,
-            @PathVariable("arsId") Long arsId
+            @PathVariable("arsId") String arsId
     ) throws Exception {
 
         int boardingBlindCnt = 0;       // 승차 예정 시각 장애인 수

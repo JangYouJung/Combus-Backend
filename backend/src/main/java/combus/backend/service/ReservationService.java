@@ -52,18 +52,18 @@ public class ReservationService {
         }
     }
 
-    public List<Reservation> findDetailOfBoardingStop(Long arsId){ // 승차 예정 (예약 중)
+    public List<Reservation> findDetailOfBoardingStop(String arsId){ // 승차 예정 (예약 중)
         List<Reservation> find_reservations = reservationRepository.findAllByBoardingStopArsIdAndBoardingStatusAndDropStatus(arsId, false, false);
         return find_reservations;
     }
 
-    public List<Reservation> findDetailOfDropStop(Long arsId){ // 하차 예정 (현재 승차 중)
+    public List<Reservation> findDetailOfDropStop(String arsId){ // 하차 예정 (현재 승차 중)
         List<Reservation> find_reservations = reservationRepository.findAllByDropStopArsIdAndBoardingStatusAndDropStatus(arsId, true, false);
         return find_reservations;
     }
 
 
-    public List<PassengerInfoDto> findPassengers(Long arsId, Boolean boardingStatus) {
+    public List<PassengerInfoDto> findPassengers(String arsId, Boolean boardingStatus) {
 
         List<Reservation> reservations;
         if(!boardingStatus){ // 승차 예정 승객 정보

@@ -19,7 +19,7 @@ public enum ResponseCode {
     RESERVATION_OFFBOARDING_SUCCESS(OK, "예약을 성공적으로 하차 처리 했습니다."),
 
     DRIVER_HOME_SUCCESS(OK,"버스기사 홈화면을 성공적으로 불러왔습니다"),
-    BUS_STOP_DETAIL_SUCCESS(OK, "버스정류장 예약정보를 성공적으로 불러왔습니다"),
+    BUS_STOP_DETAIL_SUCCESS(OK, "버스정류장 승객 정보를 성공적으로 불러왔습니다"),
 
     /* 201 CREATED : 요청 성공, 자원 생성 */
     CREATE_RESERVATION_SUCCESS(CREATED, "버스 예약을 성공했습니다."),
