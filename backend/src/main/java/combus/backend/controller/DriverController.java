@@ -46,12 +46,12 @@ public class DriverController {
             return ResponseData.toResponseEntity(ResponseCode.ACCOUNT_NOT_FOUND,null);
         }
 
-        LoginDriverResponseDto loginDriver = new LoginDriverResponseDto(driver);
-
         // 로그인 성공 => 세션 생성
         // 세션을 생성하기 전에 기존의 세션 파기
         httpServletRequest.getSession().invalidate();
         HttpSession session = httpServletRequest.getSession(true);  // Session이 없으면 생성
+
+        LoginDriverResponseDto loginDriver = new LoginDriverResponseDto(driver,session.getId());
 
         // 세션에 user의 기본키 Id를 넣어줌 123
         session.setAttribute("userId", driver.getId());

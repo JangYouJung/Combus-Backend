@@ -13,12 +13,12 @@ public class LoginDriverResponseDto {
     // 버스 기사 정보
     private Long drvierId;
     private String driverName;
-    private String loginId;
+    private String cookie;
 
-    public LoginDriverResponseDto(Driver driver){
+    public LoginDriverResponseDto(Driver driver, String sesseionId){
         drvierId = driver.getId();
         driverName = driver.getName();
-        loginId = driver.getLoginId();
+        cookie = sesseionId;
 
     }
 
