@@ -3,18 +3,16 @@ package combus.backend.controller;
 import combus.backend.domain.Reservation;
 import combus.backend.dto.ReservationResponseDto;
 import combus.backend.repository.ReservationRepository;
+import combus.backend.request.SessionId;
 import combus.backend.service.ReservationService;
 import combus.backend.util.ResponseCode;
 import combus.backend.util.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,9 +26,13 @@ public class UserHomeController {
     private ReservationRepository reservationRepository;
 
     @GetMapping("/home")
-    public ResponseEntity<ResponseData<ReservationResponseDto>> home(@SessionAttribute(name = "userId", required = false)Long userId) {
+    public ResponseEntity<ResponseData<ReservationResponseDto>> home(
+            @RequestBody SessionId sessionId ) {
 
-        // 세션이 끊어진 경우 -> 로그인 화면으로 redirect
+        Long userId = sessionId.getUserId();
+        System.out.println("현재 로그인한 사용자 아이디: " + userId);
+
+        /*
         if(userId == null){
             System.out.println("세션 expired");
 
@@ -38,8 +40,8 @@ public class UserHomeController {
             headers.setLocation(URI.create("/users/login"));
             return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
         }
+        */
 
-        System.out.println(userId);
         Reservation reservation = reservationService.ReservationCheck(userId);
 
         // 예약 내역이 없는 경우

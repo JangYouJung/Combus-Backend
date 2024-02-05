@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ReservationRequest {
+    private Long userId;            // 현재 로그인한 사용자 정보
+
     private String boardingStop;
     private String dropStop;
     private String vehId;

@@ -1,22 +1,20 @@
 package combus.backend.controller;
 
-import combus.backend.domain.Bus;
 import combus.backend.domain.BusMatch;
 import combus.backend.dto.*;
 import combus.backend.repository.BusMatchRepository;
+import combus.backend.request.SessionId;
 import combus.backend.service.BusRouteService;
 import combus.backend.service.ReservationService;
 import combus.backend.util.ResponseCode;
 import combus.backend.util.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,8 +38,11 @@ public class BusRouteController {
 
     @GetMapping("/home")
     public ResponseEntity<ResponseData<DriverHomeResponseDto>> getBusRoutesByDriverId(
-            @SessionAttribute(name = "userId", required = false)Long driverId
-    ) throws Exception {
+            @RequestBody SessionId sessionId
+            ) throws Exception {
+
+        Long driverId = sessionId.getUserId();
+        System.out.println("현재 로그인한 버스 기사: "+ driverId);
 
         //현재 로그인한 버스기사가 운전하는 버스의 vehID 가져오기
         Optional<BusMatch> busMatchOptional = busMatchRepository.findBusMatchByDriverId(driverId);
@@ -86,7 +87,6 @@ public class BusRouteController {
 
     @GetMapping("/home/{arsId}")
     public ResponseEntity<ResponseData<BusStopReserveInfoDto>> getBusStopReservationInfo(
-            @SessionAttribute(name = "userId", required = false) Long driverId,
             @PathVariable("arsId") String arsId
     ) throws Exception {
 
