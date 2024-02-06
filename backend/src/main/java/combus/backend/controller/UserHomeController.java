@@ -3,7 +3,6 @@ package combus.backend.controller;
 import combus.backend.domain.Reservation;
 import combus.backend.dto.ReservationResponseDto;
 import combus.backend.repository.ReservationRepository;
-import combus.backend.request.SessionId;
 import combus.backend.service.ReservationService;
 import combus.backend.util.ResponseCode;
 import combus.backend.util.ResponseData;
@@ -25,11 +24,10 @@ public class UserHomeController {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @GetMapping("/home")
+    @GetMapping("/home/{userId}")
     public ResponseEntity<ResponseData<ReservationResponseDto>> home(
-            @RequestBody SessionId sessionId ) {
+            @PathVariable Long userId) {
 
-        Long userId = sessionId.getUserId();
         System.out.println("현재 로그인한 사용자 아이디: " + userId);
 
         /*

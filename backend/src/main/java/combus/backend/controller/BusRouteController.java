@@ -3,7 +3,6 @@ package combus.backend.controller;
 import combus.backend.domain.BusMatch;
 import combus.backend.dto.*;
 import combus.backend.repository.BusMatchRepository;
-import combus.backend.request.SessionId;
 import combus.backend.service.BusRouteService;
 import combus.backend.service.ReservationService;
 import combus.backend.util.ResponseCode;
@@ -36,12 +35,11 @@ public class BusRouteController {
     //버스 실시간 위치 정보 가져오기
     String getBusPosURL= "http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId?";
 
-    @GetMapping("/home")
+    @GetMapping("/home/{driverId}")
     public ResponseEntity<ResponseData<DriverHomeResponseDto>> getBusRoutesByDriverId(
-            @RequestBody SessionId sessionId
+            @PathVariable("driverId") Long driverId
             ) throws Exception {
 
-        Long driverId = sessionId.getUserId();
         System.out.println("현재 로그인한 버스 기사: "+ driverId);
 
         //현재 로그인한 버스기사가 운전하는 버스의 vehID 가져오기
@@ -85,7 +83,7 @@ public class BusRouteController {
         }
     }
 
-    @GetMapping("/home/{arsId}")
+    @GetMapping("/home/busStop/{arsId}")
     public ResponseEntity<ResponseData<BusStopReserveInfoDto>> getBusStopReservationInfo(
             @PathVariable("arsId") String arsId
     ) throws Exception {
