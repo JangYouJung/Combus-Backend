@@ -75,48 +75,5 @@ public class BusRouteController {
         }
 
     }
-//    @GetMapping("/info")
-//    public ResponseEntity<ResponseData<DriverInfoBusStopDto>> getBusStopInfo(
-//            @RequestParam("arsId") Long arsId,
-//            @SessionAttribute(name = "userId", required = false) Long driverId
-//    )throws Exception {
-//        //현재 로그인한 버스기사가 운전하는 버스의 vehID 가져오기
-//        Optional<BusMatch> busMatchOptional = busMatchRepository.findBusMatchByDriverId(driverId);
-//
-//        if (busMatchOptional.isPresent()) {
-//            BusMatch busMatch = busMatchOptional.get();
-//
-//            Long vehId = busMatch.getBus().getVehId();
-//
-//            // 특정 정류장 정보 가져오기
-//            DriverInfoBusStopDto driverInfoBusStopDto = busRouteService.getBusStopInfo(arsId);
-//
-//
-//            return ResponseData.toResponseEntity(ResponseCode.DRIVER_INFO_SUCCESS, driverInfoBusStopDto);
-//
-//        } else {
-//            return ResponseData.toResponseEntity(ResponseCode.DRIVER_INFO_FAILED, null);
-//        }
-//    }
-@GetMapping("/info")
-public ResponseEntity<ResponseData<DriverInfoBusStopDto>> getBusStopInfo(
-        @RequestParam("arsId") Long arsId,
-        @SessionAttribute(name = "userId", required = false) Long driverId
-) throws Exception {
-    // 현재 로그인한 버스기사가 운전하는 버스의 vehID 가져오기
-    Optional<BusMatch> busMatchOptional = busMatchRepository.findBusMatchByDriverId(driverId);
-
-    if (busMatchOptional.isPresent()) {
-        BusMatch busMatch = busMatchOptional.get();
-
-        // 특정 정류장 정보 가져오기
-        DriverInfoBusStopDto driverInfoBusStopDto = busRouteService.getBusStopInfo(arsId);
-
-        return ResponseData.toResponseEntity(ResponseCode.DRIVER_INFO_SUCCESS, driverInfoBusStopDto);
-    } else {
-        return ResponseData.toResponseEntity(ResponseCode.DRIVER_INFO_FAILED, null);
-    }
-}
-
 
 }
