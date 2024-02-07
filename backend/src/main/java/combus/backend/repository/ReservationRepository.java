@@ -17,9 +17,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>,
     Optional<Reservation> findByUserIdAndDropStatus(Long userId, boolean dropStatus);
     Optional<Reservation> findById(Long id);
 
-    List<Reservation> findAllByBoardingStopIdAndBoardingStatusAndDropStatus(Long boardingStopId, boolean boardingStatus, boolean dropStatus);
+    List<Reservation> findAllByBoardingStopArsIdAndBoardingStatusAndDropStatus(String boardingStopId, boolean boardingStatus, boolean dropStatus);
 
-    List<Reservation> findAllByDropStopIdAndBoardingStatusAndDropStatus(Long DropStopId, boolean boardingStatus, boolean dropStatus);
+    List<Reservation> findAllByDropStopArsIdAndBoardingStatusAndDropStatus(String DropStopId, boolean boardingStatus, boolean dropStatus);
 
     @Modifying
     @Transactional

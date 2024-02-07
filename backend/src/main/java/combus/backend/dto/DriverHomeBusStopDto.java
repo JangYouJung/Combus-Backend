@@ -11,7 +11,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class DriverHomeBusStopDto {
-    private Long arsId;        // 버스 정류장 고유 번호
+    private String arsId;        // 버스 정류장 고유 번호
     private String name;       // 버스 정류장 이름
     private double gpsX;       // 정류소 위치 x좌표 : 경도
     private double gpsY;       // 정류소 위치  y좌표 : 위도
