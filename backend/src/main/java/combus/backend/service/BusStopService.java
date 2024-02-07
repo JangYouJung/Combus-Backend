@@ -13,6 +13,7 @@ import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class BusStopService {
 
     @Autowired

@@ -84,7 +84,6 @@ public class BusRouteController {
 
     }
 
-}
 
     @GetMapping("/home/{arsId}")
     public ResponseEntity<ResponseData<BusStopReserveInfoDto>> getBusStopReservationInfo(
