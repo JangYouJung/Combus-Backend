@@ -8,7 +8,9 @@ group = 'combus'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '21'
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
 }
 
 configurations {
@@ -17,10 +19,14 @@ configurations {
 	}
 }
 
-repositories {
-	mavenCentral()
+wrapper {
+	gradleVersion = '8.4'
 }
 
+repositories {
+	mavenCentral()
+	maven { url 'https://maven.google.com' }
+}
 dependencies {
 	// Thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -39,6 +45,12 @@ dependencies {
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 	//xml parsing
 	implementation 'org.jdom:jdom2:2.0.6'
+
+
+	implementation 'com.google.cloud:google-cloud-vision:3.32.0'
+
+	implementation platform('com.google.cloud:libraries-bom:26.1.5')
+	implementation 'com.google.cloud:google-cloud-vision'
 
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

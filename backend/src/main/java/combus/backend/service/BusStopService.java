@@ -13,11 +13,15 @@ import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class BusStopService {
 
     @Autowired
     private final BusStopRepository busStopRepository;
+
+    @Autowired
+    public BusStopService(BusStopRepository busStopRepository) {
+        this.busStopRepository = busStopRepository;
+    }
 
     public BusStop findByArsId(Long ArsId) {
         Optional<BusStop> getBusStop = busStopRepository.findByArsId(ArsId);
@@ -29,5 +33,12 @@ public class BusStopService {
             return busStop;
         }
         else return null;
+    }
+
+    public String getBusStopNameByArsId(Long arsId) {
+        Optional<BusStop> optionalBusStop = busStopRepository.findByArsId(arsId);
+        BusStop busStop = optionalBusStop.orElse(null);
+
+        return (busStop != null) ? busStop.getName() : null;
     }
 }

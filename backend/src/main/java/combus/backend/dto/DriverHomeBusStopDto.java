@@ -21,4 +21,6 @@ public class DriverHomeBusStopDto {
     private int drop_cnt;      // 하차 예정 인원수
 
     private boolean wheelchair;// 휠체어 사용객 탑승 여부
+
+
 }

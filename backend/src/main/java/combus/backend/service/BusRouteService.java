@@ -2,6 +2,7 @@ package combus.backend.service;
 
 import combus.backend.domain.Reservation;
 import combus.backend.dto.DriverHomeBusStopDto;
+import combus.backend.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,12 @@ public class BusRouteService {
 
     @Autowired
     ReservationService reservationService;
+
+    @Autowired
+    ReservationRepository reservationRepository;
+
+    @Autowired
+    BusStopService busStopService;
 
     public List<DriverHomeBusStopDto> getDriverRouteInfo(String xml, Long vehId) throws Exception {
         List<DriverHomeBusStopDto> driverHomeBusStopDtoList = new ArrayList<>();
@@ -83,6 +90,28 @@ public class BusRouteService {
             }
         }
         return driverHomeBusStopDtoList;
+    }
+
+    public DriverInfoBusStopDto getBusStopInfo(Long arsId) {
+        // 특정 정류장의 정보를 가져오는 코드 추가
+        List<Reservation> boardingReservations = reservationService.findDetailOfBoardingStop(arsId);
+        List<Reservation> dropReservations = reservationService.findDetailOfDropStop(arsId);
+
+
+        int totalReservedUsers = boardingReservations.size();
+        int totalOffUsers = dropReservations.size();
+        String busStopName = busStopService.getBusStopNameByArsId(arsId);
+        boolean wheelchair = boardingReservations.stream().anyMatch(reservation -> reservation.getUser().isWheelchair());
+        boolean blindness = boardingReservations.stream().anyMatch(reservation -> reservation.getUser().isBlindness());
+
+
+        // DriverInfoBusStopDto 생성
+        DriverInfoBusStopDto driverInfoBusStopDto =
+                new DriverInfoBusStopDto(
+                        arsId, busStopName, totalReservedUsers, totalOffUsers, wheelchair, blindness);
+        System.out.println(driverInfoBusStopDto.toString());
+
+        return driverInfoBusStopDto;
     }
 
     private String getElementValue(Element element, String tagName) {
