@@ -10,7 +10,6 @@ import combus.backend.util.ResponseCode;
 import combus.backend.util.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -82,7 +81,10 @@ public class BusRouteController {
         } else {
             return ResponseData.toResponseEntity(ResponseCode.DRIVER_HOME_FAILED,null);
         }
+
     }
+
+}
 
     @GetMapping("/home/{arsId}")
     public ResponseEntity<ResponseData<BusStopReserveInfoDto>> getBusStopReservationInfo(
