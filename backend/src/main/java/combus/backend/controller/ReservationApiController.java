@@ -39,16 +39,14 @@ public class ReservationApiController {//예약 기능에서 공공데이터 API
     // 예약하기 1단계: 승객 위치 기반으로 주위 버스 정류장 리스트 반환
     @GetMapping("/startst")
     public ResponseEntity<List<StartBusStopDto>> StartBusStopList(
-            @RequestBody BoardingBusStopRequest boardingBusStopRequest
+            @RequestParam(value = "gpsX") double gpsX, // 사용자 현재 위치 X 좌표
+            @RequestParam(value = "gpsY") double gpsY  // 사용자 현재 위치 Y 좌표
     ) throws Exception {
 
         HttpURLConnection urlConnection = null;
         InputStream stream = null;
         String result = null;
         RestTemplate restTemplate = new RestTemplate();
-
-        double gpsX = boardingBusStopRequest.getGpsX();
-        double gpsY = boardingBusStopRequest.getGpsY();
 
         // 공공데이터 API 요청을 보낼 url 생성
         String urlStr = getStationByPos + "ServiceKey=" + serviceKey +
