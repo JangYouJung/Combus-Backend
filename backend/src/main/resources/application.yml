@@ -5,7 +5,14 @@ spring:
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+    servlet:
+      multipart:
+        max-file-size: 40MB
+        max-request-size: 40MB
+
+
 openAPI:
   serviceKey: 5VkF97MjXByHLgBzidNVh5avU8L+X9ZUkzvwT0pE91Y/aaJDiLUIz0peKVyODO6APvL4SWnghH8sBncl0K8q8A==
   tmpKey: fesb%2Bj8fOHKjzliPcpuavNbsf0uBz3UH5e4Fyp3hq35oMWrBXLPEtwlecJr6NZgdNVSzGERT3ORnk3hM6itlVg%3D%3D
+
 

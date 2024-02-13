@@ -51,6 +51,7 @@ dependencies {
 
 	implementation platform('com.google.cloud:libraries-bom:26.1.5')
 	implementation 'com.google.cloud:google-cloud-vision'
+	implementation 'com.google.cloud:google-cloud-video-intelligence:2.33.0'
 
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
