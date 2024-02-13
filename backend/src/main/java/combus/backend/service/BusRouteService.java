@@ -57,8 +57,9 @@ public class BusRouteService {
                 int seq = Integer.parseInt(getElementValue(itemListElement, "seq"));
 
 
-                // 휠체어 탑승객 탑승 여부
+                // 휠체어 탑승객, 시각 장애인 탑승 여부
                 boolean wheelchair = false;
+                boolean blind = false;
 
                 // 예약 내역 DB에서 정류장 승차 예약 내역 가져오기
                 List<Reservation> boardingReservations = reservationService.findDetailOfBoardingStop(arsId);
@@ -69,6 +70,10 @@ public class BusRouteService {
                 for(Reservation reservation : boardingReservations){
                     if(reservation.getUser().isWheelchair()) {
                         wheelchair = true;
+                        break;
+                    }
+                    if(reservation.getUser().isBlindness()){
+                        blind = true;
                         break;
                     }
                 }
@@ -86,7 +91,7 @@ public class BusRouteService {
                 }
 
                 DriverHomeBusStopDto driverHomeBusStopDto =
-                        new DriverHomeBusStopDto(arsId, name, gpsX, gpsY, seq, reserved_cnt, drop_cnt, wheelchair);
+                        new DriverHomeBusStopDto(arsId, name, gpsX, gpsY, seq, reserved_cnt, drop_cnt, wheelchair, blind);
                 driverHomeBusStopDtoList.add(driverHomeBusStopDto);
                 System.out.println(driverHomeBusStopDto.toString());
 
