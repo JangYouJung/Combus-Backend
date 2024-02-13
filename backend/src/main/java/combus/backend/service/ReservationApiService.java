@@ -82,7 +82,7 @@ public class ReservationApiService {
 
                     // 첫 번째 도착 예정 버스의 남은 시간이 5분보다 커야 예약 가능
                     String vehId = getElementValue(itemListElement, "vehId1");
-                    if(vehId.equals("0")) break; // 버스 ID가 0이면 PASS
+                    if(vehId.equals("0")) continue; // 버스 ID가 0이면 PASS
 
                     String busRouteId = getElementValue(itemListElement, "busRouteId");
                     String busRouteAbrv = getElementValue(itemListElement, "busRouteAbrv");
@@ -94,7 +94,7 @@ public class ReservationApiService {
                 else{
                     // 첫 번째 도착 예정 버스의 남은 시간이 5분 이하면 다음 버스(두 번째 도착 버스) 예약하도록
                     String vehId = getElementValue(itemListElement, "vehId2");
-                    if(vehId.equals("0")) break; // 버스 ID가 0이면 PASS
+                    if(vehId.equals("0")) continue; // 버스 ID가 0이면 PASS
 
                     String busRouteId = getElementValue(itemListElement, "busRouteId");
                     String busRouteAbrv = getElementValue(itemListElement, "busRouteAbrv");
