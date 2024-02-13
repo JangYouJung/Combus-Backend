@@ -1,10 +1,12 @@
 package combus.backend.controller;
 
+import combus.backend.domain.Bus;
 import combus.backend.domain.BusStop;
 import combus.backend.domain.Reservation;
 import combus.backend.domain.User;
 import combus.backend.repository.ReservationRepository;
 import combus.backend.request.ReservationRequest;
+import combus.backend.service.BusService;
 import combus.backend.service.BusStopService;
 import combus.backend.service.ReservationService;
 import combus.backend.service.UserService;
@@ -34,22 +36,15 @@ public class ReservationController {
     BusStopService busStopService;
 
     @Autowired
+    BusService busService;
+
+    @Autowired
     ReservationRepository reservationRepository;
 
+
     @PostMapping("/")   // 정류장 고유 번호로 예약하기
-    public ResponseEntity<ResponseData> createReservation(
+    public ResponseEntity<ResponseData<Long>> createReservation(
             @RequestBody ReservationRequest reservationRequest){
-
-        /*
-        // 세션이 끊어진 경우 -> 로그인 화면으로 redirect
-        if(userId == null){
-            System.out.println("세션 expired");
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(URI.create("/users/login"));
-            return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
-        }
-         */
 
         // 현재 로그인한 유저 정보 가져오기 추가
         Long userId = reservationRequest.getUserId();
@@ -82,16 +77,16 @@ public class ReservationController {
             System.out.println(reservation.toString());
             reservationRepository.save(reservation);
 
-            return ResponseData.toResponseEntity(ResponseCode.CREATE_RESERVATION_SUCCESS);
+            return ResponseData.toResponseEntity(ResponseCode.CREATE_RESERVATION_SUCCESS, reservation.getId());
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace(); // 예외 정보를 콘솔에 출력
-            return ResponseData.toResponseEntity(ResponseCode.FAILED_RESERVATION_CREATTION);
+            return ResponseData.toResponseEntity(ResponseCode.FAILED_RESERVATION_CREATTION,null);
         }
     }
 
     @PostMapping("/stt")   // 정류장 이름으로 예약하기
-    public ResponseEntity<ResponseData> createReservationByStName(
+    public ResponseEntity<ResponseData<Long>> createReservationByStName(
             @RequestBody ReservationRequest reservationRequest){
 
         /************************************************
@@ -103,22 +98,11 @@ public class ReservationController {
         Long userId = reservationRequest.getUserId();
         System.out.println("로그인한 유저ID: " + userId);
 
-        /*
-        // 세션이 끊어진 경우 -> 로그인 화면으로 redirect
-        if(userId == null){
-            System.out.println("세션 expired");
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(URI.create("/users/login"));
-            return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
-        }
-        */
-
 
         String boardingStopName = reservationRequest.getBoardingStop();         // 승차 정류소 이름
         String dropStopName = reservationRequest.getDropStop();                 // 하차 정류소 이름
-        Long vehId = Long.parseLong(reservationRequest.getVehId());         // 버스 고유 ID (같은 노선의 버스라도 다 다른 고유값)
         String busRouteName = reservationRequest.getBusRouteNm();           // 버스 노선명 (ex. 140번 버스)
+
 
         try {
             User user = userService.findUserById(userId);
@@ -136,16 +120,23 @@ public class ReservationController {
                 throw new IllegalArgumentException("Drop stop with Name" + dropStopName + " not found.");
             }
 
+            // 버스 고유 아이디 vehId 찾기
+            Bus bus = busService.findByRouteName(busRouteName);
+            if( bus == null ) {
+                throw new IllegalArgumentException("Bus with RouteName" + busRouteName + " not found.");
+            }
+            Long vehId = bus.getVehId();
+
             // 객체들이 유효한 경우
             Reservation reservation = new Reservation(user,vehId,boardingStop,dropStop,busRouteName);
             System.out.println(reservation.toString());
             reservationRepository.save(reservation);
 
-            return ResponseData.toResponseEntity(ResponseCode.CREATE_RESERVATION_SUCCESS);
+            return ResponseData.toResponseEntity(ResponseCode.CREATE_RESERVATION_SUCCESS, reservation.getId());
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace(); // 예외 정보를 콘솔에 출력
-            return ResponseData.toResponseEntity(ResponseCode.FAILED_RESERVATION_CREATTION);
+            return ResponseData.toResponseEntity(ResponseCode.FAILED_RESERVATION_CREATTION, null);
         }
 
 
