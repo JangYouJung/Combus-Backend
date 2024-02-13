@@ -4,6 +4,7 @@ import combus.backend.domain.BusStop;
 import combus.backend.domain.Reservation;
 import combus.backend.dto.BusPosDto;
 import combus.backend.dto.DriverHomeBusStopDto;
+import combus.backend.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,6 +94,7 @@ public class BusRouteService {
         }
         return driverHomeBusStopDtoList;
     }
+
 
     private String getElementValue(Element element, String tagName) {
         NodeList nodeList = element.getElementsByTagName(tagName).item(0).getChildNodes();

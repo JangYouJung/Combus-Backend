@@ -21,6 +21,30 @@ public class ResponseData<T> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
+    // 생성자 추가
+    public ResponseData(String code, HttpStatus status, String detail, T data) {
+        this.code = code;
+        this.status = status;
+        this.detail = detail;
+        this.data = data;
+    }
+    // 생성자 추가 (response data가 있는 경우)
+    public ResponseData(ResponseCode responseCode, T data) {
+        this.code = responseCode.name();
+        this.status = responseCode.getHttpStatus();
+        this.detail = responseCode.getDetail();
+        this.data = data;
+    }
+
+    // 생성자 추가 (response header가 있는 경우)
+    public ResponseData(ResponseCode responseCode, MultiValueMap<String, String> header, T data) {
+        this.code = responseCode.name();
+        this.status = responseCode.getHttpStatus();
+        this.detail = responseCode.getDetail();
+        this.data = data;
+    }
+
+
     //ResponseEntity 없이 ResponseData만 필요할 때
     public static ResponseData of(ResponseCode responseCode) {
         return ResponseData.builder()

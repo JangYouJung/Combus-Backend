@@ -81,9 +81,11 @@ public class BusRouteController {
         } else {
             return ResponseData.toResponseEntity(ResponseCode.DRIVER_HOME_FAILED,null);
         }
+
     }
 
     @GetMapping("/home/busStop/{arsId}")
+
     public ResponseEntity<ResponseData<BusStopReserveInfoDto>> getBusStopReservationInfo(
             @PathVariable("arsId") String arsId
     ) throws Exception {
