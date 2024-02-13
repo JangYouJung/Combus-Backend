@@ -19,12 +19,14 @@ public class ReservationResponseDto {
     private String boardingStop;    //승차 정류소
     private String dropStop;        //하차 정류소
     private String status;          // 승하차 상태
+    private Long id;                // 예약 아이디
 
     public ReservationResponseDto(Reservation reservation){
         date = reservation.getCreatedAt();
         busRouteName = reservation.getBusRouteName();
         boardingStop = reservation.getBoardingStop().getName();
         dropStop = reservation.getDropStop().getName();
+        id = reservation.getId();
 
         // 승하차 상태 확인
         boolean boardingStatus = reservation.isBoardingStatus();

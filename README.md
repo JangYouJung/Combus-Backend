@@ -1,15 +1,11 @@
 # 🚌 Combus Backend
 ## 🚏 Team Crew 
 ### 🧑‍💻 [장유정](https://github.com/JangYouJung)
-### 🧑‍💻 이지현
+### 🧑‍💻 [이지현](https://github.com/JIHYUN2EE)
 <br></br>
 
-## 🚏 API Document
-### 📜 [COMBUS Backend API Wiki](https://cypress-overcoat-478.notion.site/API-31e4dbe46bc748e78e9d78c9ebf46f78?pvs=4)
-<br></br>
-
-## 🚏 ERD 
-### [☁️ COMBUS ERD Cloud](https://www.erdcloud.com/d/GJ5hGrCcjd4Efg4BS)
+## 📑 API Docs
+### [Combus API 명세서](https://cypress-overcoat-478.notion.site/API-31e4dbe46bc748e78e9d78c9ebf46f78?pvs=4)
 <br></br>
 
 ## 🚏 Git Convention

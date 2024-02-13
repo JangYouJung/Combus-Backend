@@ -38,11 +38,9 @@ public class ReservationController {
 
     @PostMapping("/")   // 정류장 고유 번호로 예약하기
     public ResponseEntity<ResponseData> createReservation(
-            @RequestBody ReservationRequest reservationRequest,
-            @SessionAttribute(name = "userId", required = false)Long userId){
+            @RequestBody ReservationRequest reservationRequest){
 
-        System.out.println("로그인한 유저ID: " + userId);
-
+        /*
         // 세션이 끊어진 경우 -> 로그인 화면으로 redirect
         if(userId == null){
             System.out.println("세션 expired");
@@ -51,6 +49,12 @@ public class ReservationController {
             headers.setLocation(URI.create("/users/login"));
             return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
         }
+         */
+
+        // 현재 로그인한 유저 정보 가져오기 추가
+        Long userId = reservationRequest.getUserId();
+        System.out.println("로그인한 유저ID: " + userId);
+
 
         String boardingStopId = reservationRequest.getBoardingStop();   // 승차 정류소 번호 arsId
         String dropStopId = reservationRequest.getDropStop();           // 하파 정류소 번호 arsId
@@ -88,8 +92,7 @@ public class ReservationController {
 
     @PostMapping("/stt")   // 정류장 이름으로 예약하기
     public ResponseEntity<ResponseData> createReservationByStName(
-            @RequestBody ReservationRequest reservationRequest,
-            @SessionAttribute(name = "userId", required = false)Long userId) {
+            @RequestBody ReservationRequest reservationRequest){
 
         /************************************************
          *         시각 장애인이 음성으로 예약하는 경우          *
@@ -97,8 +100,10 @@ public class ReservationController {
          *        해당 기능을 위한 api를 따로 제작했다.         *
         *************************************************/
 
+        Long userId = reservationRequest.getUserId();
         System.out.println("로그인한 유저ID: " + userId);
 
+        /*
         // 세션이 끊어진 경우 -> 로그인 화면으로 redirect
         if(userId == null){
             System.out.println("세션 expired");
@@ -107,6 +112,8 @@ public class ReservationController {
             headers.setLocation(URI.create("/users/login"));
             return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
         }
+        */
+
 
         String boardingStopName = reservationRequest.getBoardingStop();         // 승차 정류소 이름
         String dropStopName = reservationRequest.getDropStop();                 // 하차 정류소 이름
@@ -140,8 +147,6 @@ public class ReservationController {
             e.printStackTrace(); // 예외 정보를 콘솔에 출력
             return ResponseData.toResponseEntity(ResponseCode.FAILED_RESERVATION_CREATTION);
         }
-
-
 
 
     }

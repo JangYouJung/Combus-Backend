@@ -9,13 +9,13 @@ import lombok.*;
 public class LoginUserResponseDto {
     private Long id;
     private String name;
-    private String loginId;
+    //private String cookie;
 
     @Builder
     public LoginUserResponseDto(User user){
         name = user.getName();
-        loginId = user.getLoginId();
         id = user.getId();
+        //cookie= sessionId;
     }
 
 }

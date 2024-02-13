@@ -1,6 +1,5 @@
 package combus.backend.controller;
 
-import combus.backend.domain.Bus;
 import combus.backend.domain.BusMatch;
 import combus.backend.dto.*;
 import combus.backend.repository.BusMatchRepository;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,10 +35,12 @@ public class BusRouteController {
     //버스 실시간 위치 정보 가져오기
     String getBusPosURL= "http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId?";
 
-    @GetMapping("/home")
+    @GetMapping("/home/{driverId}")
     public ResponseEntity<ResponseData<DriverHomeResponseDto>> getBusRoutesByDriverId(
-            @SessionAttribute(name = "userId", required = false)Long driverId
-    ) throws Exception {
+            @PathVariable("driverId") Long driverId
+            ) throws Exception {
+
+        System.out.println("현재 로그인한 버스 기사: "+ driverId);
 
         //현재 로그인한 버스기사가 운전하는 버스의 vehID 가져오기
         Optional<BusMatch> busMatchOptional = busMatchRepository.findBusMatchByDriverId(driverId);
@@ -84,10 +84,9 @@ public class BusRouteController {
 
     }
 
+    @GetMapping("/home/busStop/{arsId}")
 
-    @GetMapping("/home/{arsId}")
     public ResponseEntity<ResponseData<BusStopReserveInfoDto>> getBusStopReservationInfo(
-            @SessionAttribute(name = "userId", required = false) Long driverId,
             @PathVariable("arsId") String arsId
     ) throws Exception {
 

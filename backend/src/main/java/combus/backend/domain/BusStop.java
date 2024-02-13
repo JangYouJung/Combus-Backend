@@ -13,8 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BusStop {
+
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String arsId;     // 정류장 고유 번호
 
     private Long nodeId;
