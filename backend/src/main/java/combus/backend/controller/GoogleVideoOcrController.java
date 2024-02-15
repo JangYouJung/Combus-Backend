@@ -1,40 +1,48 @@
-//package combus.backend.controller;
-//
-//import combus.backend.service.GoogleVideoOcrService;
-//import com.google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.web.multipart.MultipartFile;
-//
-//import java.io.IOException;
-//
-//@RestController
-//public class GoogleVideoOcrController {
-//    private final GoogleVideoOcrService googleVideoOcrService;
-//
-//    @Autowired
-//    public GoogleVideoOcrController(GoogleVideoOcrService googleVideoOcrService) {
-//        this.googleVideoOcrService = googleVideoOcrService;
-//    }
-//
-//    @PostMapping("/video")
-//    public ResponseEntity<String> detectTextFromVideo(@RequestParam("file") MultipartFile videoFile) {
-//        try {
-//            // 동영상에서 텍스트를 감지합니다.
-//            VideoAnnotationResults results = googleVideoOcrService.detectTextFromVideo(videoFile);
-//            if (results != null) {
-//                // 텍스트 감지 결과를 클라이언트에 반환합니다.
-//                return ResponseEntity.ok(results.toString());
-//            } else {
-//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to detect text from video.");
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing video file.");
-//        }
-//    }
-//}
+package combus.backend.controller;
+
+import combus.backend.dto.BusStopReserveInfoDto;
+import combus.backend.dto.EndBusStopDto;
+import combus.backend.dto.VerifyBusNumberDto;
+import combus.backend.service.GoogleVideoOcrService;
+import combus.backend.util.ResponseCode;
+import combus.backend.util.ResponseData;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+@RequestMapping("/video")
+public class GoogleVideoOcrController {
+
+    private final GoogleVideoOcrService ocrService;
+
+    @Autowired
+    public GoogleVideoOcrController(GoogleVideoOcrService ocrService) {
+        this.ocrService = ocrService;
+    }
+
+    @PostMapping
+    public ResponseEntity<ResponseData<VerifyBusNumberDto>> verifyBusNumberList(@RequestPart("videoFile") MultipartFile videoFile,
+                                                                                   @RequestParam("busRouteNm") String busRouteNm) {
+
+        List<VerifyBusNumberDto> verifyBusNumberList = new ArrayList<>();
+
+        try {
+            boolean result = ocrService.verifyBusNumber(videoFile, busRouteNm);
+            VerifyBusNumberDto dto = new VerifyBusNumberDto(result);
+            verifyBusNumberList.add(dto);
+            return ResponseData.toResponseEntity(ResponseCode.BUS_VIDEO_CHECK_SUCCESS, dto);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            // 서버 오류가 발생한 경우 빈 리스트를 반환합니다.
+            return ResponseData.toResponseEntity(ResponseCode.BUS_VIDEO_CHECK_FAILED, null);
+        }
+    }
+}
