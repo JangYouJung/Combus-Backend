@@ -23,6 +23,8 @@ public class GoogleVideoOcrService {
 
     public boolean verifyBusNumber(MultipartFile videoFile, String busRouteNm) throws IOException {
         try (VideoIntelligenceServiceClient client = VideoIntelligenceServiceClient.create()) {
+
+            System.out.println("VideoOcrService 진입");
             // 동영상 파일 내용을 읽어옵니다.
             ByteString fileContent = ByteString.copyFrom(videoFile.getBytes());
 
@@ -47,6 +49,7 @@ public class GoogleVideoOcrService {
                         VideoSegment segment = textSegment.getSegment();
                         // 텍스트가 왼쪽 위에 있는지 확인합니다.
                         if (isInUpperLeft(segment)) {
+                            System.out.println("BusNumber: "+ busRouteNm +" Detected");
                             return true; // 올바른 버스 번호가 발견되었습니다.
                         }
                     }
@@ -54,6 +57,7 @@ public class GoogleVideoOcrService {
             }
             return false; // 올바른 버스 번호가 발견되지 않았습니다.
         } catch (Exception e) {
+            System.out.println("Error: "+ e);
             e.printStackTrace();
             return false;
         }
