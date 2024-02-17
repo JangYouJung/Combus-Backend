@@ -28,7 +28,7 @@ public class GoogleVideoOcrController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseData<VerifyBusNumberDto>> verifyBusNumberList(@RequestPart("videoFile") MultipartFile videoFile,
+    public ResponseEntity<ResponseData<VerifyBusNumberDto>> verifyBusNumberList(@RequestParam("videoFile") MultipartFile videoFile,
                                                                                    @RequestParam("busRouteNm") String busRouteNm) {
 
         List<VerifyBusNumberDto> verifyBusNumberList = new ArrayList<>();
