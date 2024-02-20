@@ -102,6 +102,7 @@ public class GoogleVideoOcrService {
 
     public boolean verifyBusNumber(MultipartFile videoFile, String busRouteNm) throws IOException {
         try (VideoIntelligenceServiceClient client = VideoIntelligenceServiceClient.create()) {
+
             // 동영상 파일 내용을 읽어옵니다.
             ByteString fileContent = ByteString.copyFrom(videoFile.getBytes());
 
