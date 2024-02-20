@@ -1,11 +1,9 @@
 package combus.backend.controller;
 
 import combus.backend.domain.Reservation;
-import combus.backend.domain.User;
 import combus.backend.dto.ReservationResponseDto;
 import combus.backend.repository.ReservationRepository;
 import combus.backend.service.ReservationService;
-import combus.backend.service.UserService;
 import combus.backend.util.ResponseCode;
 import combus.backend.util.ResponseData;
 import lombok.RequiredArgsConstructor;
@@ -24,30 +22,23 @@ public class UserHomeController {
     private final ReservationService reservationService;
 
     @Autowired
-    private final UserService userSevice;
-
-    @Autowired
     private ReservationRepository reservationRepository;
 
     @GetMapping("/home/{userId}")
     public ResponseEntity<ResponseData<ReservationResponseDto>> home(
             @PathVariable Long userId) {
 
-//        if(userId == null){
-//            System.out.println("세션 expired");
-//
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.setLocation(URI.create("/users/login"));
-//            return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
-//        }
-
-
         System.out.println("현재 로그인한 사용자 아이디: " + userId);
 
-        // 유저가 실제 유저인지 확인
-        User loginUser = userSevice.findUserById(userId);
-        if(loginUser == null) return ResponseData.toResponseEntity(ResponseCode.AUTH_NUMBER_INCORRECT,null);
+        /*
+        if(userId == null){
+            System.out.println("세션 expired");
 
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("/users/login"));
+            return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
+        }
+        */
 
         Reservation reservation = reservationService.ReservationCheck(userId);
 

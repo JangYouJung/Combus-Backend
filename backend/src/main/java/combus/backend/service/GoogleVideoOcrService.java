@@ -25,6 +25,7 @@ public class GoogleVideoOcrService {
         try (VideoIntelligenceServiceClient client = VideoIntelligenceServiceClient.create()) {
 
             System.out.println("VideoOcrService 진입");
+
             // 동영상 파일 내용을 읽어옵니다.
             ByteString fileContent = ByteString.copyFrom(videoFile.getBytes());
 
