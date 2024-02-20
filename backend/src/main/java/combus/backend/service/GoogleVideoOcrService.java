@@ -42,6 +42,9 @@ public class GoogleVideoOcrService {
             for (VideoAnnotationResults result : response.getAnnotationResultsList()) {
                 for (TextAnnotation textAnnotation : result.getTextAnnotationsList()) {
                     String text = textAnnotation.getText();
+
+                    System.out.println("detected numner: "+ text);
+
                     // 텍스트가 숫자로만 구성되어 있고, 입력한 버스 번호와 일치하는지 확인합니다.
                     if (isNumeric(text) && text.equals(busRouteNm)) {
                         // 텍스트 세그먼트의 위치 정보를 가져옵니다.
