@@ -38,15 +38,9 @@ public class GoogleVideoOcrController {
             VerifyBusNumberDto dto = new VerifyBusNumberDto(result);
             verifyBusNumberList.add(dto);
             return ResponseData.toResponseEntity(ResponseCode.BUS_CHECK_SUCCESS, dto);
-<<<<<<< Updated upstream
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            // 서버 오류가 발생한 경우 빈 리스트를 반환합니다.
-=======
+
         } catch (IOException e) {
             e.printStackTrace();
->>>>>>> Stashed changes
             return ResponseData.toResponseEntity(ResponseCode.BUS_CHECK_FAILED, null);
         }
     }

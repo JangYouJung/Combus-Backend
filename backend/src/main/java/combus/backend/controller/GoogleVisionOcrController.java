@@ -30,11 +30,7 @@ public class GoogleVisionOcrController {
 
     @PostMapping("/image")
     public ResponseEntity<ResponseData<VerifyBusNumberDto>> verifyBusNumberList(@RequestParam("busRouteNm") String busRouteNm,
-<<<<<<< Updated upstream
-                                                                                @RequestParam("file") MultipartFile file) {
-=======
                                                                      @RequestParam("file") MultipartFile file) {
->>>>>>> Stashed changes
 
         List<VerifyBusNumberDto> verifyBusNumberList = new ArrayList<>();
 
