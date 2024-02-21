@@ -51,8 +51,6 @@ public class BusRouteService {
                 Element itemListElement = (Element) itemListNode;
 
                 String arsId =getElementValue(itemListElement, "arsId");
-                if(arsId.equals(" ")) continue;
-
                 String name = getElementValue(itemListElement, "stationNm");
                 double gpsX = Double.parseDouble(getElementValue(itemListElement, "gpsX"));
                 double gpsY = Double.parseDouble(getElementValue(itemListElement, "gpsY"));

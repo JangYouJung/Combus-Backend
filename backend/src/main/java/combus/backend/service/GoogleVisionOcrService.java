@@ -1,6 +1,7 @@
 //2번 가장 많이 저장된(버스번호) 숫자 추출
 
 package combus.backend.service;
+
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.vision.v1.*;
@@ -10,9 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,13 +27,13 @@ public class GoogleVisionOcrService {
         );
     }
 
-    // 이미지 파일로부터 텍스트 추출 및 숫자만 추출
-    public String extractTextAndNumbersFromImage(MultipartFile imageFile) throws IOException {
+    // 이미지 파일로부터 숫자만 추출
+    public List<Integer> extractNumbersFromImage(MultipartFile imageFile) throws IOException {
         // 이미지에서 텍스트 추출
         String extractedText = extractTextFromImage(imageFile);
 
         // 추출된 텍스트에서 숫자만 추출하여 반환
-        return extractMostFrequentNumber(extractedText);
+        return extractNumbersFromString(extractedText);
     }
 
     // 이미지 파일로부터 텍스트 추출
@@ -63,31 +62,7 @@ public class GoogleVisionOcrService {
         }
     }
 
-    // 추출된 텍스트에서 가장 많이 나타나는 숫자를 찾아서 반환
-    private String extractMostFrequentNumber(String text) {
-        // 숫자만 추출
-        List<Integer> numbers = extractNumbersFromString(text);
-
-        // 숫자의 빈도를 저장할 맵 생성
-        Map<Integer, Integer> frequencyMap = new HashMap<>();
-        for (int num : numbers) {
-            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
-        }
-
-        // 빈도가 가장 높은 숫자를 찾음
-        int mostFrequentNumber = 0;
-        int maxFrequency = 0;
-        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
-            if (entry.getValue() > maxFrequency) {
-                mostFrequentNumber = entry.getKey();
-                maxFrequency = entry.getValue();
-            }
-        }
-
-        return String.valueOf(mostFrequentNumber);
-    }
-
-    // 문자열에서 숫자만 추출하여 리스트로 반환
+    // 추출된 텍스트에서 숫자만 추출하여 리스트로 반환
     private List<Integer> extractNumbersFromString(String text) {
         List<Integer> numbers = new ArrayList<>();
         // 정규표현식을 사용하여 문자열에서 숫자만 추출
@@ -97,5 +72,17 @@ public class GoogleVisionOcrService {
             numbers.add(Integer.parseInt(matcher.group()));
         }
         return numbers;
+    }
+
+    // 사용자가 제공한 버스 번호와 이미지에서 추출된 숫자를 비교하여 일치하는지 확인
+    public boolean isBusNumberMatching(String userBusNumber, MultipartFile imageFile) throws IOException {
+        List<Integer> extractedNumberList = extractNumbersFromImage(imageFile);
+
+        for (Integer extractedNumber : extractedNumberList) {
+            if (userBusNumber.equals(String.valueOf(extractedNumber))) {
+                return true;
+            }
+        }
+        return false;
     }
 }
