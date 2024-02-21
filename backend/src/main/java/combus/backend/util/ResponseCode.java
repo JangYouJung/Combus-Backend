@@ -20,7 +20,7 @@ public enum ResponseCode {
 
     DRIVER_HOME_SUCCESS(OK,"버스기사 홈화면을 성공적으로 불러왔습니다"),
     BUS_STOP_DETAIL_SUCCESS(OK, "버스정류장 승객 정보를 성공적으로 불러왔습니다"),
-    BUS_VIDEO_CHECK_SUCCESS(OK, "버스 번호 체크에 성공했습니다."),
+    BUS_CHECK_SUCCESS(OK, "버스 번호 체크에 성공했습니다."),
 
 
     /* 201 CREATED : 요청 성공, 자원 생성 */
@@ -40,7 +40,7 @@ public enum ResponseCode {
     ACCOUNT_NOT_FOUND(NOT_FOUND, "계정 정보를 찾을 수 없습니다"),
     DRIVER_HOME_FAILED(NOT_FOUND,"버스 기사 홈 화면 로딩에 실패했습니다."),
     DRIVER_INFO_FAILED(NOT_FOUND,"버스 상세 화면 로딩에 실패하였습니다."),
-    BUS_VIDEO_CHECK_FAILED(NOT_FOUND, "버스 번호 체크에 실패했습니다");
+    BUS_CHECK_FAILED(NOT_FOUND, "버스 번호 체크에 실패했습니다");
 
 
     /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */

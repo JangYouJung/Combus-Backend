@@ -3,6 +3,9 @@
 package combus.backend.controller;
 
 import combus.backend.service.GoogleVisionOcrService;
+import combus.backend.util.ResponseCode;
+import combus.backend.util.ResponseData;
+import combus.backend.dto.VerifyBusNumberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class GoogleVisionOcrController {
@@ -24,15 +29,24 @@ public class GoogleVisionOcrController {
     }
 
     @PostMapping("/image")
-    public ResponseEntity<String> extractTextFromImage(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<ResponseData<VerifyBusNumberDto>> verifyBusNumberList(@RequestParam("busRouteNm") String busRouteNm,
+<<<<<<< Updated upstream
+                                                                                @RequestParam("file") MultipartFile file) {
+=======
+                                                                     @RequestParam("file") MultipartFile file) {
+>>>>>>> Stashed changes
+
+        List<VerifyBusNumberDto> verifyBusNumberList = new ArrayList<>();
+
         try {
-            // 이미지 파일로부터 숫자를 추출하여 가장 빈도가 높은 숫자 추출
-            String mostFrequentNumber = googleVisionOcrService.extractTextAndNumbersFromImage(file);
-            // 가장 빈도가 높은 숫자를 응답
-            return ResponseEntity.ok(mostFrequentNumber);
+            boolean result = googleVisionOcrService.isBusNumberMatching(busRouteNm, file);
+            VerifyBusNumberDto dto = new VerifyBusNumberDto(result);
+            verifyBusNumberList.add(dto);
+            return ResponseData.toResponseEntity(ResponseCode.BUS_CHECK_SUCCESS, dto);
         } catch (IOException e) {
-            // 오류가 발생한 경우 500 상태 코드와 메시지를 응답
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error extracting text from image");
+            e.printStackTrace();
+            return ResponseData.toResponseEntity(ResponseCode.BUS_CHECK_FAILED, null);
         }
     }
 }
+
