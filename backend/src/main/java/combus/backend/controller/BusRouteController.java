@@ -30,9 +30,11 @@ public class BusRouteController {
     String serviceKey;
 
     // 버스 노선 ID 사용해서 정류장 정보 가져오기
+    // Get the Bus Stop information with Bus ID from Korean Public Data portal
     String getRouteInfoURL = "http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute?";
 
-    //버스 실시간 위치 정보 가져오기
+    // 버스 실시간 위치 정보 가져오기
+    // Get the real time bus position from Korean Public Data portal
     String getBusPosURL= "http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId?";
 
     @GetMapping("/home/{driverId}")
@@ -43,6 +45,7 @@ public class BusRouteController {
         System.out.println("현재 로그인한 버스 기사: "+ driverId);
 
         //현재 로그인한 버스기사가 운전하는 버스의 vehID 가져오기
+        // Get the driver's bus's vehId(unique number)
         Optional<BusMatch> busMatchOptional = busMatchRepository.findBusMatchByDriverId(driverId);
 
         if (busMatchOptional.isPresent()) {
@@ -53,6 +56,7 @@ public class BusRouteController {
             Long vehId = busMatch.getBus().getVehId();
 
             // busRouteID를 사용해서 해당 버스의 노선 리턴
+            // Fetch the bus's route information from Korean Public Data portal.
             String url = getRouteInfoURL + "ServiceKey=" + serviceKey + "&busRouteId=" + busRouteId;
             System.out.println(url);
 
@@ -61,12 +65,13 @@ public class BusRouteController {
             String xmlData = restTemplate.getForObject(uri, String.class);
 
             // 버스 노선 정류소 정보 가져오기
+            // Fetch the information with List type
             List<DriverHomeBusStopDto> busStopList = busRouteService.getDriverRouteInfo(xmlData, vehId);
 
-            int total_reserved = 0;     // 총 예약 건수
-            int total_drop = 0;         // 총 하차 건수
+            int total_reserved = 0;     // 총 예약 건수: Total boarding passengers count
+            int total_drop = 0;         // 총 하차 건수: Total drop off passengers count
 
-            for(DriverHomeBusStopDto busStopDto : busStopList){ // 총 예약 건수 구하기
+            for(DriverHomeBusStopDto busStopDto : busStopList){ // 총 예약 건수 구하기: Total reservation count
                 total_reserved += busStopDto.getReserved_cnt();
                 total_drop += busStopDto.getDrop_cnt();
             }
@@ -90,10 +95,10 @@ public class BusRouteController {
             @PathVariable("arsId") String arsId
     ) throws Exception {
 
-        int boardingBlindCnt = 0;       // 승차 예정 시각 장애인 수
-        int boardingWheelchairCnt = 0;  // 승차 예정 휠체어 탑승객 수
-        int dropBlindCnt = 0;           // 하차 예정 시각 장애인 수
-        int dropWheelchairCnt = 0;      // 하차 예정 휠체어 탑승객 수
+        int boardingBlindCnt = 0;       // 승차 예정 시각 장애인 수: Count of Blind passengers who will board
+        int boardingWheelchairCnt = 0;  // 승차 예정 휠체어 탑승객 수: Count of Passengers riding wheelchair who will board
+        int dropBlindCnt = 0;           // 하차 예정 시각 장애인 수: Count of Blind passengers who will drop off
+        int dropWheelchairCnt = 0;      // 하차 예정 휠체어 탑승객 수: Count of Passengers riding wheelchair who will drop off
 
         // 해당 정류장 승차 예정 승객 정보 찾아오기
         List<PassengerInfoDto> boardingPassengers = reservationService.findPassengers(arsId,false);

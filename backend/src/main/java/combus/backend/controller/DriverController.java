@@ -39,25 +39,13 @@ public class DriverController {
         Driver driver = driverService.authenticateDriver(loginId);
 
         // 회원 번호가 틀린 경우
+        // if the authentication code is not valid
         if(driver == null){
             bindingResult.reject("login failed", "로그인 실패! 회원 번호를 확인해주세요.");
         }
         if(bindingResult.hasErrors()) {
             return ResponseData.toResponseEntity(ResponseCode.ACCOUNT_NOT_FOUND,null);
         }
-
-        /*
-        // 로그인 성공 => 세션 생성
-        // 세션을 생성하기 전에 기존의 세션 파기
-        httpServletRequest.getSession().invalidate();
-        HttpSession session = httpServletRequest.getSession(true);  // Session이 없으면 생성
-
-
-
-        // 세션에 user의 기본키 Id를 넣어줌 123
-        session.setAttribute("userId", driver.getId());
-        session.setMaxInactiveInterval(7200); // Session이 2시간동안 유지
-         */
 
         LoginDriverResponseDto loginDriver = new LoginDriverResponseDto(driver);
         return ResponseData.toResponseEntity(ResponseCode.SIGNIN_SUCCESS,loginDriver);
