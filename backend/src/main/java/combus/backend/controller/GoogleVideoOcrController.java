@@ -41,7 +41,9 @@ public class GoogleVideoOcrController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return ResponseData.toResponseEntity(ResponseCode.BUS_CHECK_FAILED, null);
+
+            return ResponseData.toResponseEntity(ResponseCode.BUS_VIDEO_CHECK_FAILED, null);
+
         }
     }
 }
