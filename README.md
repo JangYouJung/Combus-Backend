@@ -10,9 +10,9 @@ especially AI bus route number detection and Speech-To-Text reservation for the 
 <br></br>
 
 ## 🚏 Team Crew 
-|               🧑‍💻 [YouJung Jang](https://github.com/JangYouJung)               |               🧑‍💻 [JiHyun Lee](https://github.com/JIHYUN2EE)               |               🧑‍💻 [SinYoung Kang](https://github.com/sinyoung6491)                |               🧑‍💻 [YuNa Jung](https://github.com/13b13)                 |
+|               🧑‍💻 [YouJung Jang](https://github.com/JangYouJung)               |               🧑‍💻 [JiHyun Lee](https://github.com/JIHYUN2EE)               |               🧑‍💻 [SinYoung Kang](https://github.com/sinyoung6491)                |               🧑‍💻 [YuNa Jeong](https://github.com/13b13)                 |
 | :---------------------------------------------------------------: | :--------------------------------------------------------------: | :-------------------------------------------------------------: | :-----------------------------------------------------------: |
-| ![image](https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/202e60b8-d715-4d83-a372-a21b4b153b07)| <img width="600" alt="지현" src=""> | <img width="600" alt="신영" src=""> | <img width="600" alt="유나" src=""> |
+| ![image](https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/202e60b8-d715-4d83-a372-a21b4b153b07)| ![image](https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/f3616fda-5d66-43e6-8438-5e47b07da873) | ![image](https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/33179ee5-b52f-4e33-9418-76ac80b15313)| ![KakaoTalk_Photo_2024-02-27-23-52-27](https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/3f8a37bd-631e-40d0-b758-417580790a68)
 |                  <p align = "center">`Leader / Backend`                  |                 <p align = "center">`Backend / AI`                  |                 <p align = "center">`Bus Driver App Frontend`                 |                <p align = "center">`Passenger App Frontend`                |
 
 <br></br>
