@@ -46,12 +46,61 @@ Set up the project through [GCP console](https://cloud.google.com/video-intellig
 -----------------------------------------------------------------
 ### 4. Now you're ready to run the Combus Server!  
 📲 Try out with Combus UI from [Combus Frontend Repository](https://github.com/GDSC-COMBUS/Combus-Frontend)
+
+<br></br>
+
+
+## 🗂️ App Types
+|  | Passenger App | Bus Driver App |
+|:---:|:---|:---|
+| App | MyApplication | ComBus_DriverApp |
+| **User** | Visually impaired and wheelchair users | Bus Driver |
+| **Function** | - Select boarding and drop off stops through GPS location<Br/> - Bus boarding reservation, voice reservation, and voice service<Br/> - Bus number verification service via camera  | - Check bus real-time location and scroll through routes automatically<Br/> - Next stop reservation info pop-up notification |
+
+<br></br>
+
+## 🎬 How to use Combus
+### 📱 User App
+**General reservation method**
+1. Enter the user verification code and press 'START' to log in.
+2. Press 'CREATE' to select the boarding stop among the nearby stops based on the current location.</br>
+   (✋Set the current location to South Korea, Seoul) 
+3. Select the target bus from the bus list passing through the selected boarding stop.
+4. Choose a drop-off stop among the bus stops.
+5. Reservation completed
+
+**Voice reservation method**
+1. Press 'VOICE' to voice the user verification code and press the 'START' button to log in.
+2. Press 'CREATE WITH VOICE' to start the voice reservation.
+3. Listen to the voice description and press 'START' to recognize the voice.
+4. Designate boarding stop, bus, and drop-off stop and complete the reservation.
+
+**How to verify bus number after booking**
+1. Press 'WEBCAM FOR BUS VERIFICATION' to check the camera screen.
+2. When the bus arrives, press 'START CAPTURE' to start recording the video, and press 'STOP CAPTURE' to stop recording the video.
+3. Check the information below the 'START CAPTURE' button. It'll tell you if it's right bus or not.
+
+**How to use it after making a reservation**
+1. When boarding, press 'BOARDING CONFIRM' to change the status.
+2. When you get off, change the status by pressing 'DROPPING OFF CONFIRM'.
+
+-----------------------------------------------------------------
+
+### 📱 Bus driver App
+**How to check location and reservation information**
+1. Enter the driver verification code and press 'LOGIN' to log in.
+2. It scrolls automatically and shows the current bus location with the yellow bus stamp. (Automatic refresh every 30 seconds)
+3. Check the reservation information for each stop. <br/>
+   (Reservation: Count of boarding passengers / Drop off: Count of dropping off passengers / Wheelchair shape on the right side if there is a wheelchair reservation)
+4. Press each bus stop to check the boarding and drop off passenger's information at each stop.
+5. On the home screen, if the next bus stop has any boarding or drop off passenger based on the current bus location, a pop-up notification appears for 10 second. Press Auto Close or X to close it.
+
 <br></br>
 
 ## 📑 API Docs
 ### [Combus API Document](https://cypress-overcoat-478.notion.site/API-31e4dbe46bc748e78e9d78c9ebf46f78?pvs=4)
 <br></br>
 
-## 🚏 Git Convention
-### Git Flow
-![gitflow](https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/4828d2ee-b192-4eca-96b4-96204698edcf)
+## 🎨 Design
+### 🖼️ [Figma](https://www.figma.com/file/pKEx9GyBsCvqL84lFxsSZI/2024-Google-Solution-Challenge---%EC%9E%A5%EC%95%A0%EC%9D%B8-%EB%B2%84%EC%8A%A4-%EB%8F%84%EC%9A%B0%EB%AF%B8?type=design&node-id=3%3A163&mode=design&t=KuWlg1gsUkA1h4xp-1)
+
