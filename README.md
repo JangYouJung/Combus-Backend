@@ -17,7 +17,21 @@ especially AI bus route number detection and Speech-To-Text reservation for the 
 
 <br></br>
 
-## 📝 How to use Combus
+## 📝 How to setup Local Combus Server
+### 1. Clone this repository
+### 2. Get the Service key from each API 
+### [1] Korea Public Data Portal for Bus Information
+To get the service key from Korea Public Data Portal, Sign up, and apply for open apis underneath, then you'll get service key! 
+|Open API name| apply link |
+|:--:|:--:|
+|Get Seoul Bus Arrival Info |https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15000314|
+|Get Seoul Bus Position Info|https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15000332|
+|Get Seoul Bus Route Info |https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15000193|
+|Get Seoul Bus Stop Info|https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15000303|
+### [👉Click here ](https://yuejeong.tistory.com/63) for more detailed infromation about how to apply!
+
+
+#### [2] Google Video Intelligence API
 
 <br></br>
 
