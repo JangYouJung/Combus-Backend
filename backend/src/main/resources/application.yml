@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/combus
-    username: combus
-    password: 12341234
+    url: jdbc:mysql://${your server url}:3306/combus
+    username: ${DB username}
+    password: ${DB password}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   servlet:
@@ -13,7 +13,4 @@ spring:
 
 
 openAPI:
-  serviceKey: 5VkF97MjXByHLgBzidNVh5avU8L+X9ZUkzvwT0pE91Y/aaJDiLUIz0peKVyODO6APvL4SWnghH8sBncl0K8q8A==
-  tmpKey: fesb%2Bj8fOHKjzliPcpuavNbsf0uBz3UH5e4Fyp3hq35oMWrBXLPEtwlecJr6NZgdNVSzGERT3ORnk3hM6itlVg%3D%3D
-
-
+  serviceKey: ${your service key}
