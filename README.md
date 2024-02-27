@@ -56,7 +56,7 @@ Set up the project through [GCP console](https://cloud.google.com/video-intellig
 |:---:|:---|:---|
 | App | MyApplication | ComBus_DriverApp |
 | **User** | Visually impaired and wheelchair users | Bus Driver |
-| **Function** | - Select boarding and drop off stops through GPS location<Br/> - Bus boarding reservation, voice reservation, and voice service<Br/> - Bus number verification service via camera  | - Check bus real-time location and scroll through routes automatically<Br/> - Next stop reservation info pop-up notification |
+| **Function** | - Select boarding and drop off stops through GPS location<Br/> - Bus boarding reservation, voice reservation, and voice service<Br/> - Bus number verification service via camera  | - Check bus real-time location and scroll through routes automatically<Br/> - Next stop reservation info pop-up notification |
 
 <br></br>
 
