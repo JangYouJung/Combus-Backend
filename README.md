@@ -45,7 +45,7 @@ Set up the project through [GCP console](https://cloud.google.com/video-intellig
 
 -----------------------------------------------------------------
 ### 4. Now you're ready to run the Combus Server!  
-Try out with Combus UI from [Combus Frontend Repository](https://github.com/GDSC-COMBUS/Combus-Frontend)
+📲 Try out with Combus UI from [Combus Frontend Repository](https://github.com/GDSC-COMBUS/Combus-Frontend)
 <br></br>
 
 ## 📑 API Docs
