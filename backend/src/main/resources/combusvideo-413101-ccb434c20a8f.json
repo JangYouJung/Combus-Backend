@@ -1,13 +1,13 @@
 {
   "type": "service_account",
-  "project_id": "combus-413101",
-  "private_key_id": "ccb434c20a8fb6e0288e2bf5aa53600f7325e96a",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDN8REm+63DXgDf\nOKDG4ni774Ld74LJwv5UHwdkHY82hVoGkHCRUBhSmeN3vZDYd57RO6UAQOiDPZVm\nfCkZXNlwA0ttKwMxvjZoFHS8Ufo5srYAdLdt+0GKDreopLmBQsTVQfVWlY3zkf6H\nrEBbSLf+2fU0EGUBahYC11XlTPryhlrrutwAlI2QVbukO2SUiyvjbwUFHJiXccMm\nKUD81yLljEMvgOQ6+Ccxp7O/NedsngdCkHaDK9ilA799upq58x+SskYi2za6ekPV\nkFMxJbrvuBKis/R3f7CPAUUG1UT1pv/s+S95iNFmrznKiymw5IGGPbVYNO06oACe\n0QVGFtxhAgMBAAECggEAS6ZEELfe6qc7VsQseyJyC0c+IVx8BLV2S1xikKozE2oE\n2ehxEVAEv0L8Rd4CuSGn22A3ilJNlvgmS1FMn5512Sm8qUtljv46ah0pjIvoiQ1W\nwfAd+W6UcqxZVr+7zPnD6DqkbrvdOx3kC96AfYfG3v0dj5R+JfjcQQrs6KBQhomf\nSmiTZcYV54Y58h0wIrihWVjKV85Vnn4uXs+Qjrtpc/w7oWnI1e/FDmOiRcZ5tAeF\nChl0PnZw8jONp3BNWA30rk1j/+pBVg7Wb1URpqLc43TlW8npQcOv1Uck+qUcrUal\naEX1Y3jxTsYNOVCtxn/C2TY+XZn3/I5pCF8ZZUFVqQKBgQDuOwxg3WBO9XHrCwpl\nrVZY8jqJaI0bbrvy/kxydR2YMbxpuCBtDiwk9cpXXK+lfWQyKDDp3xpAkODB6OGJ\nTqAYrBRCauHBsR6wTnAX4Q1Dy4u6b8NmvdTgvMYZd0tSo8enjg9Qd5mDdzxnd+bX\n6Ez6YZGAgPNyyF5l0lwrtOahjwKBgQDdTXgJoLXq4MY8rXKPwkGQCLnFbPTANRyG\n9nq/crvbp2UW5DBa7zL0lAiR5pxL51gFctz2MZO83XO0BuhJlWY+xLyofMMltFlA\nuwu4GAywKCGd7b39MWp7Kk/Rg+eIKxZWG0nw8TxvLgvdSE6I9ftzZXw1ppIAnne8\nSXz6BJnLDwKBgQDIoh5IrehgV0H7q66z9wnTmx1FgDHmupm7igOkGZI1DR4bAyD7\n94WiEwa4EK00+KebvlGDhYu8eMdxR8o6M2eNn87oKM+8qoin/0dUNQtQ32nsOBge\nvR09sH4+EEP1c03AhVnMcQ1utMrAcTCPAWtjKyy5RuDA+JLXuhQ6Ev5xbQKBgAcc\niDD3AyGLG5OzlyzbdzPjs+SOPcc3bbVAkm04iKTkWjFEH/GsIh0N7MCTgo5F3uQ9\n7q/SpAa7rw4n8qr6rBB0TgO0DqlVhFC6MgQ2caHviDUFAMf0IJHYqDv5WyVbDRqz\nQcsGVYTVG/h+bFemX/AzYKxwr9xpOzvHuMZoA3EtAoGBAL2tJMYvdZYYqBA9++Cj\nkPZ9BFqnXiYGCvscVB9nJkgqtq6//BhCpIR8e//Q39rvwy6j7bnY6FedBVB4ga4j\n3BK0LdYRBKp0tuKlfxurlJkLNylDMQRGwi9ZFOtJQ7pb7j8jaZB8t6w7bvcI+2xI\nXYumZr339jk3CdUXJnAvX0tA\n-----END PRIVATE KEY-----\n",
-  "client_email": "combusvideo@combus-413101.iam.gserviceaccount.com",
-  "client_id": "102969437323369213978",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/combusvideo%40combus-413101.iam.gserviceaccount.com",
+  "project_id": ${your project id},
+  "private_key_id": ${your private key id},
+  "private_key": ${your Private Key},
+  "client_email": ${your client email},
+  "client_id": ${your client id},
+  "auth_uri": ${your auth_uri},
+  "token_uri": ${your token_uri},
+  "auth_provider_x509_cert_url": ${your auth provider url},
+  "client_x509_cert_url": ${your client url},
   "universe_domain": "googleapis.com"
 }
