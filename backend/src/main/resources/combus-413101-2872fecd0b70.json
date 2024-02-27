@@ -1,13 +1,13 @@
 {
   "type": "service_account",
-  "project_id": "combus-413101",
-  "private_key_id": "2872fecd0b705836122d357a85c4fffbfc080e07",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDMdSP0rroya1m/\nCThUnGWsbI8jgGor6nyQjLcxQO7benOGDR1O1aoGuztDk10uA8vWajSvcaYAfjVK\nJwseiUw4BOmrN1lCMk3dlIie85tHndqTHw7P50xMfkT29SZcssdIxikur4RA5NQi\nP7kwum+i3wJgtJzgvrBGFBtHUEmb6bXoviFVlrSlcpFfOV3jX9fJHcKdOGKU0Mp9\nGA2JBwspmQpshfiBW1HjQv3SGqH+8OzpESGJ5Z7PXkvHbC+I59grx8u0qFCMDxdI\nCdSU+D+V2fyEYc1I9nAosS7iB0lm9glrRvovmn/lNbQYWYjY3wmObX99Nns6yfbi\nOTTz2KllAgMBAAECggEAO8VXAJX/+vNlJjL0089w7cpCwjctUq9XQQ7SE0UPTvxq\nP1sgIUbXUOZ1edjf2a7kbUdZJZ0M0YIT5Byr5H5w2MOe6B3jKzX3i3p7wjQnRfWA\ny5e9xcuxg386fBPI5jqhhcXgjjRjbnE3DtggNH2cWznkwQ6r+gvlDmecXem7yycu\n7sYK+56Uxnng/FnklFfNXpeOnOR7v2kS21Fn6sGmCcTZPV1zL1Oxck+o1isKLdIJ\nA/3x7Qck09ilfE3ZrhNVQ3Fm2VzQjSpaNHMWMMUniTwFADx+AyZ8JtfQ4KU474Tm\nCmjgBUI0igDGUqsLKZ248qcWYBo1G51TLi6HV9yXdQKBgQDn4UYnoZ+419lEvYK/\nJBoySisflIOQBbDKHYMgKu4zVInv7TsgUoxKNOEsJmzz12s+Zr0ay5Bmqhvq34fi\n9d1aalYCgL4Sho7Egu2mrJluD40WHhGBqpcYJvjHaFuc5esbWB+WTD+Diuu8oGs9\nCyFFC3Ux4fRLuQpwlPMvV8CUEwKBgQDhuaLX8Sr+/u96KnXXu3xM41mPgZ3YSvEZ\nBVGez5yltNF96Btjne14q0feSVmhJ7hCLx/ZbwrqeSAZ1bA90ukYbBflkrw9D0iP\nLn3AouJSZQWcfeQIwrkyw0ff0ccEj+4WbGz1rXozp5i0LBWAiL38u7sNToAMVzz+\nytor2J/LpwKBgGPIc1IWoQ8AA8Uq8BqkxIkjlY8Pb9YIPN2c+ZJcJwj7tigDJFBy\ndWBxhPxkxLnh14qQ14uyUb98MGtQKb+nIcwIul51XFXIhaNW3EG/QH82PfZolgwA\nhuijzKay58mKvzOTJnSc9y/6FhujxMIOChEWLyZ6H5B+Xlm4HzYeQwb1AoGBAMs5\nUv+QReGmrP0UVVyRk+u1lOC7Fd2yOzcHruCIksQt856j5mTdvvuxWdcruuJ43E/a\nFZaxfuZzfw9DcJV42hv+1dT/MzLWG8GtXdKd053TDiZCwZeRmSO25XMBb2kQHI9b\ntw3JzgfLkJRGTGWYt1RfwJzOXELAGE5dW+e19MhpAoGBAKpmyuVl4528tCOZp2PT\nodI2jtUO9hvjrPg8o2mAbPna85K7t4D+noby6wzZ1SJhElevU57tV0auDPOFTb2H\nrzSQp/7lb42Ut/Mqp/3ajR6rWHj2xD/rYg0/B680soBxF9CcdCgCOm6NPOFzNz8r\nEVZFvd2Gsn678wJWwszGt5sa\n-----END PRIVATE KEY-----\n",
-  "client_email": "combus@combus-413101.iam.gserviceaccount.com",
-  "client_id": "100395686670468150398",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/combus%40combus-413101.iam.gserviceaccount.com",
+  "project_id": "{your project id}",
+  "private_key_id": "{your private key id}",
+  "private_key": "{your private key}",
+  "client_email": "{your client email}",
+  "client_id": "{your client id}",
+  "auth_uri": "{your auth_uri}",
+  "token_uri": "{your token uri}",
+  "auth_provider_x509_cert_url": "{your auth provider url}",
+  "client_x509_cert_url": "{your client cert url}",
   "universe_domain": "googleapis.com"
 }
