@@ -20,7 +20,7 @@ especially AI bus route number detection and Speech-To-Text reservation for the 
 <br></br>
 
 ## 📝 How to setup Local Combus Server
-### 1. Clone this repository
+### 1. Clone [Combus Backend Repository](https://github.com/GDSC-COMBUS/Combus-Backend)
 ### 2. Get the Service key from each APIs below
 -----------------------------------------------------------------
 ### [1] Korea Public Data Portal for Bus Information Open API
@@ -50,7 +50,8 @@ Set up the project through [GCP console](https://cloud.google.com/video-intellig
 <br></br>
 
 
-## 🗂️ App Types
+## 🗂️ App Types 
+### Check out the code at [Combus Frontend Repository](https://github.com/GDSC-COMBUS/Combus-Frontend)
 |  | Passenger App | Bus Driver App |
 |:---:|:---|:---|
 | App | MyApplication | ComBus_DriverApp |
@@ -61,7 +62,7 @@ Set up the project through [GCP console](https://cloud.google.com/video-intellig
 
 ## 🎬 How to use Combus
 ### 📱 User App
-**General reservation method**
+🔹 **General reservation method**
 1. Enter the user verification code and press 'START' to log in.
 2. Press 'CREATE' to select the boarding stop among the nearby stops based on the current location.</br>
    (✋Set the current location to South Korea, Seoul) 
@@ -69,25 +70,25 @@ Set up the project through [GCP console](https://cloud.google.com/video-intellig
 4. Choose a drop-off stop among the bus stops.
 5. Reservation completed
 
-**Voice reservation method**
+🔹 **Voice reservation method**
 1. Press 'VOICE' to voice the user verification code and press the 'START' button to log in.
 2. Press 'CREATE WITH VOICE' to start the voice reservation.
 3. Listen to the voice description and press 'START' to recognize the voice.
 4. Designate boarding stop, bus, and drop-off stop and complete the reservation.
 
-**How to verify bus number after booking**
+🔹 **How to verify bus number after booking**
 1. Press 'WEBCAM FOR BUS VERIFICATION' to check the camera screen.
 2. When the bus arrives, press 'START CAPTURE' to start recording the video, and press 'STOP CAPTURE' to stop recording the video.
 3. Check the information below the 'START CAPTURE' button. It'll tell you if it's right bus or not.
 
-**How to use it after making a reservation**
+🔹 **How to use it after making a reservation**
 1. When boarding, press 'BOARDING CONFIRM' to change the status.
 2. When you get off, change the status by pressing 'DROPPING OFF CONFIRM'.
 
 -----------------------------------------------------------------
 
 ### 📱 Bus driver App
-**How to check location and reservation information**
+🔹 **How to check location and reservation information**
 1. Enter the driver verification code and press 'LOGIN' to log in.
 2. It scrolls automatically and shows the current bus location with the yellow bus stamp. (Automatic refresh every 30 seconds)
 3. Check the reservation information for each stop. <br/>
