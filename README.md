@@ -9,7 +9,9 @@ especially AI bus route number detection and Speech-To-Text reservation for the 
 ### [<img width="1509" alt="스크린샷 2024-02-25 02 42 48" src="https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/463a87c4-0caa-4f99-b470-2c9c0190f704">](https://www.youtube.com/watch?v=fFhG3aAYjc4)
 <br></br>
 
-
+## 📑 Combus System Architecture
+![스크린샷 2024-02-28 02 34 12](https://github.com/JangYouJung/Combus-Backend/assets/80906691/d7842215-0212-4665-87fd-6a48b0f6b78b)
+<br></br>
 
 ## 🚏 Combus Team Crew 
 |               🧑‍💻 [YouJung Jang](https://github.com/JangYouJung)               |               🧑‍💻 [JiHyun Lee](https://github.com/JIHYUN2EE)               |               🧑‍💻 [SinYoung Kang](https://github.com/sinyoung6491)                |               🧑‍💻 [YuNa Jeong](https://github.com/13b13)                 |
