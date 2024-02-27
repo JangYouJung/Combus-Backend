@@ -1,6 +1,4 @@
-# 🚌 Combus Backend
-<img width="1509" alt="스크린샷 2024-02-25 02 42 48" src="https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/463a87c4-0caa-4f99-b470-2c9c0190f704">
-
+# 🚌 Combus - Google Solution Challenge 2024
 ## 🚎 What is Combus? 
 Combus provides solutions to lower the inequality on using bus in South Korea.
 It provides bus reservation and boarding assistance services for the disabled, 
@@ -8,7 +6,7 @@ especially AI bus route number detection and Speech-To-Text reservation for the 
 <br></br>
 
 ## 📽️ Demo Video
-### [Combus Youtube Demo](https://www.youtube.com/watch?v=fFhG3aAYjc4)
+### [<img width="1509" alt="스크린샷 2024-02-25 02 42 48" src="https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/463a87c4-0caa-4f99-b470-2c9c0190f704">](https://www.youtube.com/watch?v=fFhG3aAYjc4)
 <br></br>
 
 ## 🚏 Team Crew 
