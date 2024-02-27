@@ -14,7 +14,7 @@ especially AI bus route number detection and Speech-To-Text reservation for the 
 ## 🚏 Team Crew 
 |               🧑‍💻 [YouJung Jang](https://github.com/JangYouJung)               |               🧑‍💻 [JiHyun Lee](https://github.com/JIHYUN2EE)               |               🧑‍💻 [SinYoung Kang](https://github.com/sinyoung6491)                |               🧑‍💻 [YuNa Jung](https://github.com/13b13)                 |
 | :---------------------------------------------------------------: | :--------------------------------------------------------------: | :-------------------------------------------------------------: | :-----------------------------------------------------------: |
-| <img width="600" alt="유정" src=""> | <img width="600" alt="지현" src=""> | <img width="600" alt="신영" src=""> | <img width="600" alt="유나" src=""> |
+| ![image](https://github.com/GDSC-COMBUS/Combus-Backend/assets/80906691/202e60b8-d715-4d83-a372-a21b4b153b07)| <img width="600" alt="지현" src=""> | <img width="600" alt="신영" src=""> | <img width="600" alt="유나" src=""> |
 |                  <p align = "center">`Leader / Backend`                  |                 <p align = "center">`Backend / AI`                  |                 <p align = "center">`Bus Driver App Frontend`                 |                <p align = "center">`Passenger App Frontend`                |
 
 <br></br>
