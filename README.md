@@ -1,4 +1,4 @@
-# 🚌 Combus - 2024 Google Solution Challenge TOP 100 🏆 
+# 🚌 Combus: 2024 Google Solution Challenge TOP 100  
 
 ## 🚎 What is Combus? 
 Combus provides solutions to lower the inequality on using bus in South Korea.
