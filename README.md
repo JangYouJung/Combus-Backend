@@ -10,10 +10,6 @@ especially AI bus route number detection and Speech-To-Text reservation for the 
 ### [![컴버스 목업](https://github.com/JangYouJung/Combus-Backend/assets/80906691/85a9ed1b-b224-43be-b41b-e86e8ee646a7)](https://www.youtube.com/watch?v=fFhG3aAYjc4)
 <br></br>
 
-## 📑 Combus System Architecture
-![스크린샷 2024-02-28 02 34 12](https://github.com/JangYouJung/Combus-Backend/assets/80906691/d7842215-0212-4665-87fd-6a48b0f6b78b)
-<br></br>
-
 ## 🚏 Combus Team Crew 
 |               🧑‍💻 [YouJung Jang](https://github.com/JangYouJung)               |               🧑‍💻 [JiHyun Lee](https://github.com/JIHYUN2EE)               |               🧑‍💻 [SinYoung Kang](https://github.com/sinyoung6491)                |               🧑‍💻 [YuNa Jeong](https://github.com/13b13)                 |
 | :---------------------------------------------------------------: | :--------------------------------------------------------------: | :-------------------------------------------------------------: | :-----------------------------------------------------------: |
@@ -101,10 +97,14 @@ Set up the project through [GCP console](https://cloud.google.com/video-intellig
 
 <br></br>
 
+## 📑 Combus System Architecture
+![스크린샷 2024-02-28 02 34 12](https://github.com/JangYouJung/Combus-Backend/assets/80906691/d7842215-0212-4665-87fd-6a48b0f6b78b)
+<br></br>
+
 ## 📑 API Docs
-### [Combus API Document](https://cypress-overcoat-478.notion.site/API-31e4dbe46bc748e78e9d78c9ebf46f78?pvs=4)
+### 🔗 [Combus API Document](https://cypress-overcoat-478.notion.site/API-31e4dbe46bc748e78e9d78c9ebf46f78?pvs=4)
 <br></br>
 
 ## 🎨 Design
-### 🖼️ [Figma](https://www.figma.com/file/pKEx9GyBsCvqL84lFxsSZI/2024-Google-Solution-Challenge---%EC%9E%A5%EC%95%A0%EC%9D%B8-%EB%B2%84%EC%8A%A4-%EB%8F%84%EC%9A%B0%EB%AF%B8?type=design&node-id=3%3A163&mode=design&t=KuWlg1gsUkA1h4xp-1)
+### 🔗 [Figma](https://www.figma.com/file/pKEx9GyBsCvqL84lFxsSZI/2024-Google-Solution-Challenge---%EC%9E%A5%EC%95%A0%EC%9D%B8-%EB%B2%84%EC%8A%A4-%EB%8F%84%EC%9A%B0%EB%AF%B8?type=design&node-id=3%3A163&mode=design&t=KuWlg1gsUkA1h4xp-1)
 
